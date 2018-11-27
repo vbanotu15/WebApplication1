@@ -1,0 +1,144 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="WebApplication1.SiteMaster" %>
+
+<!DOCTYPE html>
+<html id="test" lang="en">
+<head runat="server">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Structural Steel – Beams and Channel Supply – Steel Dynamics</title>
+    <link rel="canonical" href="https://www.sdi-structural.com/index.html">
+    <link href="../Style/css/main-sdi-structural.css" rel="stylesheet" type="text/css">
+    <link href="../Style/css/nivo-slider-sdi.css" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Montserrat:400,700|Lora:400,400italic,700,700italic|Muli:400,300italic,300" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+    <script src="../js/modernizr-custom.js"></script>
+    <link rel="shortcut icon" href="https://www.sdi-structural.com/favicon.ico">
+</head>
+
+
+<body>
+    <form id="form1" runat="server">
+        <h1>Steel Dynamics Structural Rail Division</h1>
+        <div id="wrapper">
+            <!-- the header and navigation -->
+            <header>
+                <div class="logowrapper">
+                    <div class="logocontainer">
+                        <div class="logo" title="Steel Dynamics Structural and Rail Division">
+                            <a href="../default.aspx">
+                                <img src="../Images/home/steel-dynamics-rail-division-logo.svg" alt="Steel Dynamics Structural and Rail Division" /></a>
+                        </div>
+                    </div>
+
+                    <div class="topnav">
+                        <ul>
+                            <li><a href="../Security/Login.aspx">MySDI Login</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="clear"></div>
+                </div>
+
+                <nav class="nav">
+                    <h2>Main Navigation</h2>
+                    <a id="menu-toggle" class="anchor-link" href="#">Menu</a>
+                    <ul class="simple-toggle" id="menu">
+                        <li><a href="../Default.aspx">Home</a></li>
+                        <li><a href="../about/company-overview.aspx">About</a></li>
+                        <li><a href="structural-products/products-overview.aspx">Structural Products</a></li>
+                        <li><a href="resources/resources-overview.aspx">Resources</a></li>
+                        <li><a href="contact/structural-contact-us.aspx">Contact</a></li>
+                        <li><a href="contact/structural-request-quote.aspx">Request Quote</a></li>
+                    </ul>
+                </nav>
+            </header>
+
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+
+            <!--Modernizer-->
+            <script>
+                if (!Modernizr.svg) var i = document.getElementsByTagName("img"), j, y; for (j = i.length; j--;)y = i[j].src, y.match(/svg$/) && (i[j].src = y.slice(0, -3) + "png")</script>
+            <!--EndModernizer-->
+            <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+            <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+            <!--NivoSlider-->
+            <script type="text/javascript" src="js/jquery-1.9.0.min.js"></script>
+            <script type="text/javascript" src="js/jquery.nivo.slider.min.js"></script>
+
+            <!--Mobile Navigation-->
+            <script>
+                $(document).ready(function () {
+
+                    $('#menu-toggle').click(function () {
+                        $('#menu').toggleClass('open');
+                        e.preventDefault();
+                    });
+
+                });
+            </script>
+
+            <!--Slideshow Script-->
+            <script type="text/javascript">
+                $(window).load(function () {
+                    $('.slider').nivoSlider({
+                        effect: 'fade', // Specify sets like: 'fold,fade,sliceDown'
+                        directionNav: false,// Next & Prev navigation
+                        controlNav: false, // 1,2,3... navigation
+                        pauseOnHover: false, // Stop animation while hovering
+                        slices: 15, // For slice animations
+                        animSpeed: 500, // Slide transition speed
+                        pauseTime: 5000, // How long each slide will show
+                    });
+                });
+            </script>
+            <!--End Slideshow Script-->
+
+
+            <!-- the footer -->
+            <footer>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="company-overview.html">About</a></li>
+                    <li><a href="../structural-products/products-overview.html">Structural Products</a></li>
+                    <li><a href="../resources/resources-overview.html">Resources</a></li>
+                    <li><a href="../contact/structural-contact-us.php">Contact</a></li>
+                    <li><a href="../contact/structural-request-quote.php">Request Quote</a></li>
+                </ul>
+                <div class="LeftColumn">
+                    <ul>
+                        <li><a href="about/web-policy.aspx">Web Policy/Fwd Look</a></li>
+                        <li><a href="sitemap.aspx">Site Map</a></li>
+                    </ul>
+                </div>
+
+                <div class="RightColumn">
+                    <a href="http://www.steeldynamics.com/" target="_blank">
+                        <img src="../Images/home/sdi-steel-dynamics-logo.png" alt="SDI Steel Dynamics, Inc" title="SDI Steel Dynamics, Inc" /></a>
+                </div>
+                <div class="clear"></div>
+
+                <div class="LeftColumn">
+                    <p>
+                        <script type="text/javascript">
+                            copyright = new Date();
+                            update = copyright.getFullYear();
+                            document.write("© " + update);
+                        </script>
+                        Steel Dynamics, Inc.    &nbsp;&nbsp;All rights reserved.
+                    </p>
+                </div>
+
+
+                <div class="clear"></div>
+            </footer>
+            <div class="spacer25 clear"></div>
+        </div>
+    </form>
+</body>
+
+
+</html>

@@ -1,0 +1,46 @@
+
+body {
+    background-color: #ffffff;
+    font-size: 16px; /* font size of the body based on the browser 16px **/
+    font-family: 'Montserrat', sans-serif;
+}
+
+table {
+    border-collapse: collapse;
+    width: 450px;
+}
+
+th {
+    background-color: #E6E6E6;
+    border: 1px solid #424242;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+    color: #424242;
+    padding: 8px 0;
+}
+
+td {
+    border: 1px solid #424242;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: #424242;
+    padding: 4px 6px;
+}
+
+.A {
+    float: left;
+    width: 48%;
+}
+
+.B {
+    float: right;
+    width: 48%;
+}
+
+.logo {
+    text-align: center;
+    margin-bottom: 30px;
+}
+

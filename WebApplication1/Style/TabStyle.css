@@ -1,0 +1,62 @@
+﻿.customTabs .ajax__tab_header
+{
+    font-family: verdana,tahoma,helvetica;
+    font-size: 11px;
+}
+.customTabs .ajax__tab_header .ajax__tab_outer
+{
+    padding-right: 4px;
+    background: url('images/tab-right.gif') no-repeat right;
+    height: 28px;
+}
+.customTabs .ajax__tab_header .ajax__tab_inner
+{
+    padding-left: 3px;
+    background: url('images/tab-left.gif') no-repeat;
+}
+.customTabs .ajax__tab_header .ajax__tab_tab
+{
+    height: 20px;
+    padding: 4px;
+    margin: 0px;
+    background: url('images/tab.gif') repeat-x;
+}
+.customTabs .ajax__tab_header .ajax__tab_hover .ajax__tab_outer
+{
+    cursor: pointer;
+    background: url('images/tab-hover-right2.gif') no-repeat right;
+}
+.customTabs .ajax__tab_header .ajax__tab_hover .ajax__tab_inner
+{
+    cursor: pointer;
+    background: url('images/tab-hover-left.gif') no-repeat;
+}
+.customTabs .ajax__tab_header .ajax__tab_hover .ajax__tab_tab
+{
+    cursor: pointer;
+    background: url('images/tab-hover.gif') repeat-x;
+}
+/*.customTabs .ajax__tab_header .ajax__tab_active { margin-top: 1px; } */
+.customTabs .ajax__tab_header .ajax__tab_active .ajax__tab_outer
+{
+    background: url('images/tab-active-right.gif') no-repeat right;
+}
+.customTabs .ajax__tab_header .ajax__tab_active .ajax__tab_inner
+{
+    background: url('images/tab-active-left.gif') no-repeat;
+}
+.customTabs .ajax__tab_header .ajax__tab_active .ajax__tab_tab
+{
+    background: url('images/tab-active.gif') repeat-x;
+    color: White;
+}
+.customTabs .ajax__tab_body
+{
+    font-family: verdana,tahoma,helvetica;
+    font-size: 10pt;
+    border:0;
+    padding: 0px;
+    color: Black;
+    background-color: transparent;
+    height: 100%;
+}

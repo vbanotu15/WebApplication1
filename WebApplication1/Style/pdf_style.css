@@ -1,0 +1,60 @@
+﻿.pdf_main-column{
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	padding: 5px 0 0 0;
+}
+
+.pdf
+{
+    width: 100%;
+    height: 100%;
+}
+
+.pdf_main-column table
+{
+    background: transparent;
+}
+
+.pdf_main-column table td
+{
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    color: White;
+    text-align: left;
+    vertical-align: top;
+    font-size: 1.0em;
+    border:0;
+}
+
+.pdf_main-column table td a
+{
+    
+}
+
+.pdf_temp
+{
+    background: none;
+    height: 100%;
+    width: 100%;
+    font-size: 2.0em;
+}
+
+.pdf_breadcrumbs{
+	width: 100%;
+	overflow: hidden;
+	height: 20px;
+	padding: 0 0 0 10px;
+	line-height: 20px;
+	font-size: 0.917em;
+	color: #7e7e7e;
+	text-transform: uppercase;
+	text-align:center;
+}
+.pdf_breadcrumbs a{
+	background: url(images/pointer-bc.png) no-repeat 100% 50%;
+	padding:0 15px 0 0;
+	margin: 0 5px 0 0;
+	color: #7e7e7e;
+}

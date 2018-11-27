@@ -1,0 +1,163 @@
+(function () {
+
+	// nodes
+	var $productType = $('#productType');
+	var $productSize = $('#productSize');
+	var $productGrade = $('#productGrade');
+	var $productLength = $('#productLength');
+	var $results = $('#results');
+
+	// string templates
+	var optionTemplate = '<option value="{val}">{text}</option>';
+	var tableRowRowspan = '	<td rowspan="{rowspan}">{type}</td>';
+	var tableRow =  '<tr>' +
+				    '	{rowspan}' +
+					'	<td><p class="red">{size}</p></td>' +
+					'	<td>{grade}</td>' +
+					'	<td>{length}</td>' +
+					'	<td>{pricesPerBundle}</td>' +
+					'	<td>{bundleWeight}</td>' +
+					'	<td>{bundleAvailable}</td>' +
+					'	<td>{price}</td>' +
+					'	<td>{nextRollWeek}</td>' +
+					'</tr>';
+
+	// data
+	var typeData = [];
+	var sizeData = [];
+	var gradeData = [];
+
+	// functions
+	var getOption = function (val, text)
+	{
+		return optionTemplate.replace('{val}', val).replace('{text}', text);
+	};
+
+	var getOptions = function(data)
+	{
+		var options = getOption('', 'Select');
+
+		for(var option in data)
+		{
+			options += getOption(option, option);
+		}
+
+		return options;
+	};
+
+	var getItemsByAttribute = function(data, attr, value)
+	{
+		var matches = [];
+		for(var item in data)
+		{
+			if( data[item][attr] === value )
+			{
+				matches.push(data[item]);
+			}
+		}
+		return matches;
+	};
+
+	var applyValues = function(tpl, data)
+	{
+		var template = tpl;
+		for(var field in data)
+		{
+			var token = '{' + field + '}';
+			template = template.replace(token, data[field]);
+		}
+		return template;
+	};
+
+	var generateResults = function(data)
+	{
+		var html = '';
+		var rowSpan = '';
+		var rowHtml = '';
+		var rowData = null;
+
+		// iterate all the items in tyis type
+		for( var i= 0, l=data.length; i<l; i++)
+		{
+			// only apply a rowspan to the first item of this type
+			rowSpan = '';
+			rowData = data[i];
+			rowData.rowspan = '';
+
+			// when this is the first item, apply the rowspan
+			if( i === 0 )
+			{
+				rowData.rowspan = tableRowRowspan
+					.replace('{rowspan}', rowData.length)
+					.replace('{type}', data[i]['type']);
+			}
+
+			rowHtml += applyValues(tableRow, rowData);
+		}
+
+		html += rowHtml;
+
+		return html;
+	};
+
+
+	// bind
+	$productType.on('change', function(){
+
+		var type = $productType.val();
+
+		$productSize.html(
+			getOptions(filteredData[type])
+		);
+
+		typeData = getItemsByAttribute(inventoryData, 'type', type);
+
+		$results.html(
+			generateResults(typeData)
+		);
+
+		// reset
+		gradeData = [];
+		$productGrade.html('');
+		$productLength.html('');
+	});
+
+	$productSize.on('change', function(){
+		var type = $productType.val();
+		var size = $productSize.val();
+
+		$productGrade.html(
+			getOptions(filteredData[type][size])
+		);
+
+		sizeData = getItemsByAttribute(typeData, 'size', size);
+
+		$results.html(
+			generateResults(sizeData)
+		);
+
+		// reset
+		gradeData = [];
+		$productLength.html('');
+	});
+
+	$productGrade.on('change', function(){
+		var type = $productType.val();
+		var size = $productSize.val();
+		var grade = $productGrade.val();
+
+		$productLength.html(
+			getOptions(filteredData[type][size][grade])
+		);
+
+		gradeData = getItemsByAttribute(sizeData, 'size', size);
+
+		$results.html(
+			generateResults(gradeData)
+		);
+
+
+	});
+
+
+})();

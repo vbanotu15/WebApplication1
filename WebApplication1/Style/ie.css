@@ -1,0 +1,14 @@
+body {
+	width:expression(document.documentElement.clientWidth < 1010 ? "1010px" : "auto");
+}
+.footer-menu li{
+	background-image: expression( (this===this.parentNode.childNodes[0]) ? "none" : "auto");
+}
+.show-block{
+	background:url(none.gif);
+	filter:progid:dximagetransform.microsoft.alphaimageloader(src='images/bg-show-block.png', sizingmethod='scale');
+}
+.sidebar-content li span.pointer{
+	background:url(none.gif);
+	filter:progid:dximagetransform.microsoft.alphaimageloader(src='images/pointer-3.png', sizingmethod='crop');
+}

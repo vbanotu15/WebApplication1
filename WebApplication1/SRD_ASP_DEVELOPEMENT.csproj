@@ -1,0 +1,990 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D857A83C-B1F9-45DC-903D-0DE51938A1BF}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WebApplication1</RootNamespace>
+    <AssemblyName>WebApplication1</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="AspNet.ScriptManager.bootstrap">
+      <HintPath>..\packages\AspNet.ScriptManager.bootstrap.3.3.7\lib\net45\AspNet.ScriptManager.bootstrap.dll</HintPath>
+    </Reference>
+    <Reference Include="AspNet.ScriptManager.jQuery">
+      <HintPath>..\packages\AspNet.ScriptManager.jQuery.3.3.1\lib\net45\AspNet.ScriptManager.jQuery.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ScriptManager.MSAjax">
+      <HintPath>..\packages\Microsoft.AspNet.ScriptManager.MSAjax.5.0.0\lib\net45\Microsoft.ScriptManager.MSAjax.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ScriptManager.WebForms">
+      <HintPath>..\packages\Microsoft.AspNet.ScriptManager.WebForms.5.0.0\lib\net45\Microsoft.ScriptManager.WebForms.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Web.Optimization.WebForms">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.WebForms.1.1.3\lib\net45\Microsoft.AspNet.Web.Optimization.WebForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.FriendlyUrls">
+      <HintPath>..\packages\Microsoft.AspNet.FriendlyUrls.Core.1.0.2\lib\net45\Microsoft.AspNet.FriendlyUrls.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="About\Capabilities.aspx" />
+    <Content Include="About\company-overview.aspx" />
+    <Content Include="Contact.aspx" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Default.aspx" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Images\.DS_Store" />
+    <Content Include="Images\headers\.DS_Store" />
+    <Content Include="Images\home\.DS_Store" />
+    <Content Include="Images\home\sliders\.DS_Store" />
+    <Content Include="Images\staff\.DS_Store" />
+    <Content Include="JS\inventory.js.bak" />
+    <Content Include="Master\About.Master" />
+    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Images\aisc-square.jpg" />
+    <Content Include="Images\aisc-wide.jpg" />
+    <Content Include="Images\angle-square.jpg" />
+    <Content Include="Images\angles-home.jpg" />
+    <Content Include="Images\angles-main.jpg" />
+    <Content Include="Images\angles-square.jpg" />
+    <Content Include="Images\angles-wide.jpg" />
+    <Content Include="Images\beams-square.jpg" />
+    <Content Include="Images\beams-wide.jpg" />
+    <Content Include="Images\body.jpg" />
+    <Content Include="Images\body.png" />
+    <Content Include="Images\c-channels-main.jpg" />
+    <Content Include="Images\c-channels-square.jpg" />
+    <Content Include="Images\c-channels-wide.jpg" />
+    <Content Include="Images\careers-main.jpg" />
+    <Content Include="Images\catalogs-main.jpg" />
+    <Content Include="Images\community-main.jpg" />
+    <Content Include="Images\community-square.jpg" />
+    <Content Include="Images\community-wide.jpg" />
+    <Content Include="Images\culture-2-mill-workers-main.jpg" />
+    <Content Include="Images\culture-2-mill-workers-square.jpg" />
+    <Content Include="Images\culture-2-mill-workers-wide.jpg" />
+    <Content Include="Images\culture-main.jpg" />
+    <Content Include="Images\culture-square.jpg" />
+    <Content Include="Images\culture-wide.jpg" />
+    <Content Include="Images\Diane-wide.jpg" />
+    <Content Include="Images\eaf-charging-main.jpg" />
+    <Content Include="Images\eaf-charging-square.jpg" />
+    <Content Include="Images\eaf-charging-wide.jpg" />
+    <Content Include="Images\environment-main.jpg" />
+    <Content Include="Images\environment-square.jpg" />
+    <Content Include="Images\environment-wide.jpg" />
+    <Content Include="Images\expidited.jpg" />
+    <Content Include="Images\facilities-main.jpg" />
+    <Content Include="Images\fpo-large.jpg" />
+    <Content Include="Images\fpo-main.jpg" />
+    <Content Include="Images\fpo-square.jpg" />
+    <Content Include="Images\fpo-wide.jpg" />
+    <Content Include="Images\h-pile-main.jpg" />
+    <Content Include="Images\h-pile-square.jpg" />
+    <Content Include="Images\h-pile-wide.jpg" />
+    <Content Include="Images\headers\company-header.jpg" />
+    <Content Include="Images\headers\resources-header.jpg" />
+    <Content Include="Images\headers\structural-contact-header.jpg" />
+    <Content Include="Images\headers\structural-products-header.jpg" />
+    <Content Include="Images\headers\strucutural-resources-header.jpg" />
+    <Content Include="Images\home\copy.png" />
+    <Content Include="Images\home\featureArrow.png" />
+    <Content Include="Images\home\fpo-home.jpg" />
+    <Content Include="Images\home\new-fpo-home.jpg" />
+    <Content Include="Images\home\new-mill-logo-grey.png" />
+    <Content Include="Images\home\new-mill-logo.png" />
+    <Content Include="Images\home\new-mill-logo.svg" />
+    <Content Include="Images\home\newmill_logo.png" />
+    <Content Include="Images\home\red-arrow.png" />
+    <Content Include="Images\home\sdi-steel-dynamics-logo.png" />
+    <Content Include="Images\home\semi-finished-bloom-home.jpg" />
+    <Content Include="Images\home\sliders\sdi-slider-fpo-desktop.jpg" />
+    <Content Include="Images\home\sliders\sdi-slider-fpo-mobile.jpg" />
+    <Content Include="Images\home\sliders\sdi-structural-h-pile-desktop.jpg" />
+    <Content Include="Images\home\sliders\sdi-structural-h-pile-mobile.jpg" />
+    <Content Include="Images\home\sliders\sdi-structural-hsm-saw-cooling-bed-desktop.jpg" />
+    <Content Include="Images\home\sliders\sdi-structural-hsm-saw-cooling-bed-mobile.jpg" />
+    <Content Include="Images\home\sliders\sdi-structural-rolling-desktop.jpg" />
+    <Content Include="Images\home\sliders\sdi-structural-rolling-mobile.jpg" />
+    <Content Include="Images\home\sliders\sdi-structural-shipping-desktop.jpg" />
+    <Content Include="Images\home\sliders\sdi-structural-shipping-mobile.jpg" />
+    <Content Include="Images\home\sliders\sdi-structural-standard-i-beams-desktop.jpg" />
+    <Content Include="Images\home\sliders\sdi-structural-standard-i-beams-mobile.jpg" />
+    <Content Include="Images\home\small-red-arrow.png" />
+    <Content Include="Images\home\small-yellow-arrow.png" />
+    <Content Include="Images\home\steel-dynamics-rail-division-logo.png" />
+    <Content Include="Images\home\steel-dynamics-rail-division-logo.svg" />
+    <Content Include="Images\home\structural-plant-tour-home.jpg" />
+    <Content Include="Images\home\structural-products-home.jpg" />
+    <Content Include="Images\home\structural-semi-finished-products-home.jpg" />
+    <Content Include="Images\home\transparent.gif" />
+    <Content Include="Images\home\transparent.png" />
+    <Content Include="Images\home\white-arrow.png" />
+    <Content Include="Images\home\yellow-arrow.png" />
+    <Content Include="Images\hsm-cooling-main.jpg" />
+    <Content Include="Images\hsm-cooling-square.jpg" />
+    <Content Include="Images\hsm-cooling-wide.jpg" />
+    <Content Include="Images\icon-sort-asc.gif" />
+    <Content Include="Images\icon-sort-desc.gif" />
+    <Content Include="Images\icon-sortable.gif" />
+    <Content Include="Images\management-square.jpg" />
+    <Content Include="Images\management-wide.jpg" />
+    <Content Include="Images\manufactured-housing-beams-main.jpg" />
+    <Content Include="Images\manufactured-housing-beams-square.jpg" />
+    <Content Include="Images\manufactured-housing-beams-wide.jpg" />
+    <Content Include="Images\mc-channels-main.jpg" />
+    <Content Include="Images\mc-channels-square.jpg" />
+    <Content Include="Images\mc-channels-wide.jpg" />
+    <Content Include="Images\mysdi\mysdi-freight.jpg" />
+    <Content Include="Images\mysdi\mysdi-profile.jpg" />
+    <Content Include="Images\mysdi\mysdi-reporting.jpg" />
+    <Content Include="Images\nascc-home.jpg" />
+    <Content Include="Images\personal-service-main.jpg" />
+    <Content Include="Images\personal-service-square.jpg" />
+    <Content Include="Images\personal-service-wide.jpg" />
+    <Content Include="Images\poster\sdi-structural-poster.jpg" />
+    <Content Include="Images\resources-square-aar.jpg" />
+    <Content Include="Images\resources-square-abs.jpg" />
+    <Content Include="Images\resources-square-bundle.jpg" />
+    <Content Include="Images\resources-square-claims.jpg" />
+    <Content Include="Images\resources-square-credit.jpg" />
+    <Content Include="Images\resources-square-freight.jpg" />
+    <Content Include="Images\resources-square-guides.jpg" />
+    <Content Include="Images\resources-square-inventory.jpg" />
+    <Content Include="Images\resources-square-iso.jpg" />
+    <Content Include="Images\resources-square-leed.jpg" />
+    <Content Include="Images\resources-square-msds.jpg" />
+    <Content Include="Images\resources-square-pricing.jpg" />
+    <Content Include="Images\resources-square-rolling.jpg" />
+    <Content Include="Images\resources-square-terms.jpg" />
+    <Content Include="Images\resources-wide-aar.jpg" />
+    <Content Include="Images\resources-wide-abs.jpg" />
+    <Content Include="Images\resources-wide-bundle.jpg" />
+    <Content Include="Images\resources-wide-claims.jpg" />
+    <Content Include="Images\resources-wide-credit.jpg" />
+    <Content Include="Images\resources-wide-freight.jpg" />
+    <Content Include="Images\resources-wide-guides.jpg" />
+    <Content Include="Images\resources-wide-inventory.jpg" />
+    <Content Include="Images\resources-wide-iso.jpg" />
+    <Content Include="Images\resources-wide-leed.jpg" />
+    <Content Include="Images\resources-wide-msds.jpg" />
+    <Content Include="Images\resources-wide-pricing.jpg" />
+    <Content Include="Images\resources-wide-rolling.jpg" />
+    <Content Include="Images\resources-wide-terms.jpg" />
+    <Content Include="Images\safety-main.jpg" />
+    <Content Include="Images\safety-square.jpg" />
+    <Content Include="Images\safety-wide.jpg" />
+    <Content Include="Images\sdi-corp-sign-main.jpg" />
+    <Content Include="Images\sdi-corp-sign-square.jpg" />
+    <Content Include="Images\sdi-corp-sign-wide.jpg" />
+    <Content Include="Images\sdi-ships-rail-square.jpg" />
+    <Content Include="Images\sdi-ships-rail-wide.jpg" />
+    <Content Include="Images\sdi-sprites-right-left.png" />
+    <Content Include="Images\sdi-sprites.png" />
+    <Content Include="Images\semi-fin-bloom-square.jpg" />
+    <Content Include="Images\semi-fin-bloom-wide.jpg" />
+    <Content Include="Images\semi-finished-bloom-main.jpg" />
+    <Content Include="Images\staff\Ann-Frank.png" />
+    <Content Include="Images\staff\Becky-Carder.png" />
+    <Content Include="Images\staff\Ben-Bishop.jpg" />
+    <Content Include="Images\staff\Ben-Green.png" />
+    <Content Include="Images\staff\Ben-Parks.png" />
+    <Content Include="Images\staff\Bob-Barrick.png" />
+    <Content Include="Images\staff\Chris-Gionti.jpg" />
+    <Content Include="Images\staff\clay-spangler.jpg" />
+    <Content Include="Images\staff\Colby-Ramaker.png" />
+    <Content Include="Images\staff\Craig-Weiss.png" />
+    <Content Include="Images\staff\Dave-Tokos.png" />
+    <Content Include="Images\staff\David-Hauze.jpg" />
+    <Content Include="Images\staff\Dianne-Pittenger.png" />
+    <Content Include="Images\staff\Jeremy-Cronkhite.jpg" />
+    <Content Include="Images\staff\Jim-Hoppes.png" />
+    <Content Include="Images\staff\john-Wassel.png" />
+    <Content Include="Images\staff\Johnny-Brewer.png" />
+    <Content Include="Images\staff\Josh-Horning.jpg" />
+    <Content Include="Images\staff\Keith-Padgett.png" />
+    <Content Include="Images\staff\Kelly-Penrod.png" />
+    <Content Include="Images\staff\ken-rampolla.jpg" />
+    <Content Include="Images\staff\Kenny-Rampolla.png" />
+    <Content Include="Images\staff\kevin-perela.jpg" />
+    <Content Include="Images\staff\Lisa-Bennett.jpg" />
+    <Content Include="Images\staff\Liz-Lentis.jpg" />
+    <Content Include="Images\staff\michael-busse.jpg" />
+    <Content Include="Images\staff\Nicole-Happel.jpg" />
+    <Content Include="Images\staff\Penn-Whitlow.png" />
+    <Content Include="Images\staff\Rob-King.jpg" />
+    <Content Include="Images\staff\Robert-Carter.png" />
+    <Content Include="Images\staff\Roxy-Hagans.png" />
+    <Content Include="Images\staff\Ryan-Angst.jpg" />
+    <Content Include="Images\staff\Ryan-Angst.png" />
+    <Content Include="Images\staff\Sandy-Swing.png" />
+    <Content Include="Images\staff\Sheila-Curry.jpg" />
+    <Content Include="Images\staff\Stephan-Ferenczy.jpg" />
+    <Content Include="Images\staff\Timothy-Semonich.png" />
+    <Content Include="Images\staff\Todd-Bashford.jpg" />
+    <Content Include="Images\staff\Tom-Lutes.jpg" />
+    <Content Include="Images\staff\Troy-Bayman.jpg" />
+    <Content Include="Images\standard-i-beams-main.jpg" />
+    <Content Include="Images\standard-i-beams-square.jpg" />
+    <Content Include="Images\standard-i-beams-wide.jpg" />
+    <Content Include="Images\tier2\arrow-grey.png" />
+    <Content Include="Images\tier2\arrow-white.png" />
+    <Content Include="Images\tier2\download-arrow.gif" />
+    <Content Include="Images\tier2\grey-bullet.png" />
+    <Content Include="Images\tier2\newmill-icon.png" />
+    <Content Include="Images\tier2\small-blue-arrow.png" />
+    <Content Include="Images\tier2\small-red-arrow.png" />
+    <Content Include="Images\tier2\small-yellow-arrow-back.png" />
+    <Content Include="Images\tier2\small-yellow-arrow.png" />
+    <Content Include="Images\tier2\white-learn-arrow-back.png" />
+    <Content Include="Images\tier2\white-learn-arrow.png" />
+    <Content Include="Images\video-square.jpg" />
+    <Content Include="Images\video-wide.jpg" />
+    <Content Include="Images\vision-main.jpg" />
+    <Content Include="Images\vision-square.jpg" />
+    <Content Include="Images\vision-wide.jpg" />
+    <Content Include="Images\wide-flange-beam-square.jpg" />
+    <Content Include="Images\wide-flange-beam-wide.jpg" />
+    <Content Include="Images\wide-flange-beams-main.jpg" />
+    <Content Include="Images\WPsite-maintenance.jpg" />
+    <Content Include="JS\enquire.min.js" />
+    <Content Include="JS\global.js" />
+    <Content Include="JS\inventory.js" />
+    <Content Include="JS\jquery-1.9.0.min.js" />
+    <Content Include="JS\jquery-1.9.1.min.js" />
+    <Content Include="JS\jquery.floatThead.min.js" />
+    <Content Include="JS\jquery.js" />
+    <Content Include="JS\jquery.nivo.slider.js" />
+    <Content Include="JS\jquery.nivo.slider.min.js" />
+    <Content Include="JS\jquery.tablesorter.min.js" />
+    <Content Include="JS\js.cookies.js" />
+    <Content Include="JS\knockout-3.4.0.js" />
+    <Content Include="JS\magnific-popup.min.js" />
+    <Content Include="JS\modernizr-custom.js" />
+    <Content Include="JS\test-inventory.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.js" />
+    <Content Include="Scripts\jquery-3.3.1.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\WebForms\DetailsView.js" />
+    <Content Include="Scripts\WebForms\Focus.js" />
+    <Content Include="Scripts\WebForms\GridView.js" />
+    <Content Include="Scripts\WebForms\Menu.js" />
+    <Content Include="Scripts\WebForms\MenuStandards.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjax.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxApplicationServices.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxComponentModel.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxCore.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxGlobalization.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxHistory.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxNetwork.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxSerialization.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxTimer.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxWebForms.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxWebServices.js" />
+    <Content Include="Scripts\WebForms\SmartNav.js" />
+    <Content Include="Scripts\WebForms\TreeView.js" />
+    <Content Include="Scripts\WebForms\WebForms.js" />
+    <Content Include="Scripts\WebForms\WebParts.js" />
+    <Content Include="Scripts\WebForms\WebUIValidation.js" />
+    <Content Include="Master\Site.Master" />
+    <Content Include="Security\Login.aspx" />
+    <Content Include="Style\CSS\form-sdi.css" />
+    <Content Include="Style\CSS\holding.css" />
+    <Content Include="Style\CSS\magnific-popup.css" />
+    <Content Include="Style\CSS\main-sdi-structural.css" />
+    <Content Include="Style\CSS\nivo-slider-sdi.css" />
+    <Content Include="Style\CSS\pdf.css" />
+    <Content Include="Style\CSS\tables.css" />
+    <Content Include="Style\CSS\tier2-sdi-structural.css" />
+    <Content Include="Style\CSS\tools-sdi.css" />
+    <Content Include="Style\ie.css" />
+    <Content Include="Style\images\Aaron_Hammill.jpg" />
+    <Content Include="Style\images\aerial_2.jpg" />
+    <Content Include="Style\images\aerial_4.png" />
+    <Content Include="Style\images\aerial_contact.jpg" />
+    <Content Include="Style\images\Alex_Hammond.jpg" />
+    <Content Include="Style\images\Andrew_Yaney.jpg" />
+    <Content Include="Style\images\Andy_Kametz.jpg" />
+    <Content Include="Style\images\angel_coburn.jpg" />
+    <Content Include="Style\images\ann_frank.bmp" />
+    <Content Include="Style\images\Ann_Frank.jpg" />
+    <Content Include="Style\images\Anonymous_Document.png" />
+    <Content Include="Style\images\ants-horizontal.gif" />
+    <Content Include="Style\images\ants-vertical.gif" />
+    <Content Include="Style\images\arrow.gif" />
+    <Content Include="Style\images\articles.swf" />
+    <Content Include="Style\images\asc.gif" />
+    <Content Include="Style\images\background2.gif" />
+    <Content Include="Style\images\background3.gif" />
+    <Content Include="Style\images\Barry_Gerardot.jpg" />
+    <Content Include="Style\images\becky_carder.jpg" />
+    <Content Include="Style\images\Ben_Bishop.jpg" />
+    <Content Include="Style\images\Ben_Green.jpg" />
+    <Content Include="Style\images\Ben_Parks.jpg" />
+    <Content Include="Style\images\bg-body.gif" />
+    <Content Include="Style\images\bg-body2.gif" />
+    <Content Include="Style\images\bg-body_dark.png" />
+    <Content Include="Style\images\bg-content-home.gif" />
+    <Content Include="Style\images\bg-content-home2.gif" />
+    <Content Include="Style\images\bg-content-home_dark.png" />
+    <Content Include="Style\images\bg-content-home_utilities.gif" />
+    <Content Include="Style\images\bg-content.gif" />
+    <Content Include="Style\images\bg-content_dark.png" />
+    <Content Include="Style\images\bg-footer.gif" />
+    <Content Include="Style\images\bg-holder.gif" />
+    <Content Include="Style\images\bg-info.gif" />
+    <Content Include="Style\images\bg-lincks-block.gif" />
+    <Content Include="Style\images\bg-next.gif" />
+    <Content Include="Style\images\bg-prev.gif" />
+    <Content Include="Style\images\bg-show-block.png" />
+    <Content Include="Style\images\bg-title-dev.gif" />
+    <Content Include="Style\images\bg.gif" />
+    <Content Include="Style\images\bg_header.jpg" />
+    <Content Include="Style\images\bigphoto.bmp" />
+    <Content Include="Style\images\big_map.gif" />
+    <Content Include="Style\images\big_photo1.bmp" />
+    <Content Include="Style\images\big_photo2.bmp" />
+    <Content Include="Style\images\bob_barrick.bmp" />
+    <Content Include="Style\images\Bob_Barrick.jpg" />
+    <Content Include="Style\images\border.png" />
+    <Content Include="Style\images\bottom_side.jpg" />
+    <Content Include="Style\images\break.jpg" />
+    <Content Include="Style\images\break.png" />
+    <Content Include="Style\images\break_brown_small.png" />
+    <Content Include="Style\images\break_grey_small.png" />
+    <Content Include="Style\images\break_small.png" />
+    <Content Include="Style\images\Bryan_Kidd.jpg" />
+    <Content Include="Style\images\btn_create.png" />
+    <Content Include="Style\images\btn_create_down.png" />
+    <Content Include="Style\images\btn_delete.png" />
+    <Content Include="Style\images\btn_delete_down.png" />
+    <Content Include="Style\images\bul.jpg" />
+    <Content Include="Style\images\bulet-2.gif" />
+    <Content Include="Style\images\bulet.gif" />
+    <Content Include="Style\images\bullet-red.gif" />
+    <Content Include="Style\images\calendar.bmp" />
+    <Content Include="Style\images\Casting_2.png" />
+    <Content Include="Style\images\casting_bg.png" />
+    <Content Include="Style\images\casting_side.png" />
+    <Content Include="Style\images\Casting_side_2.png" />
+    <Content Include="Style\images\chevron.gif" />
+    <Content Include="Style\images\chevron.png" />
+    <Content Include="Style\images\chevron_only_RGB.png" />
+    <Content Include="Style\images\chevron_RGB.jpg" />
+    <Content Include="Style\images\chevron_RGB.png" />
+    <Content Include="Style\images\chevron_RGB_white.png" />
+    <Content Include="Style\images\chevron_RGB_wide.jpg" />
+    <Content Include="Style\images\chevron_RGB_wide.png" />
+    <Content Include="Style\images\Chris_Gionti.jpg" />
+    <Content Include="Style\images\clay_spangler.bmp" />
+    <Content Include="Style\images\clay_spangler.jpg" />
+    <Content Include="Style\images\coho.png" />
+    <Content Include="Style\images\colby_howe.jpg" />
+    <Content Include="Style\images\Colby_Ramaker.jpg" />
+    <Content Include="Style\images\Colby_Rammaker.jpg" />
+    <Content Include="Style\images\columbia city srd 2 mills small.jpg" />
+    <Content Include="Style\images\columbia city srd 2 mills.jpg" />
+    <Content Include="Style\images\columbia_map.swf" />
+    <Content Include="Style\images\columbia_mapB.swf" />
+    <Content Include="Style\images\company.jpg" />
+    <Content Include="Style\images\contact.gif" />
+    <Content Include="Style\images\contact.jpg" />
+    <Content Include="Style\images\contact.swf" />
+    <Content Include="Style\images\contact2.jpg" />
+    <Content Include="Style\images\contact_card.png" />
+    <Content Include="Style\images\contact_old.swf" />
+    <Content Include="Style\images\controls.png" />
+    <Content Include="Style\images\Copy of customer.swf" />
+    <Content Include="Style\images\corporate.swf" />
+    <Content Include="Style\images\Craig_Longardner.jpg" />
+    <Content Include="Style\images\Craig_Weiss.jpg" />
+    <Content Include="Style\images\customer.swf" />
+    <Content Include="Style\images\dave_tokos.bmp" />
+    <Content Include="Style\images\dave_tokos.jpg" />
+    <Content Include="Style\images\David_Hauze.jpg" />
+    <Content Include="Style\images\Dennis_Black.jpg" />
+    <Content Include="Style\images\desc.gif" />
+    <Content Include="Style\images\Devon_Rush.jpg" />
+    <Content Include="Style\images\dianne_pittenger.bmp" />
+    <Content Include="Style\images\Dianne_Pittenger.jpg" />
+    <Content Include="Style\images\directions.swf" />
+    <Content Include="Style\images\directions_banner.gif" />
+    <Content Include="Style\images\directions_old.swf" />
+    <Content Include="Style\images\download_lbl.png" />
+    <Content Include="Style\images\download_pdf.png" />
+    <Content Include="Style\images\Drew_Seely.jpg" />
+    <Content Include="Style\images\email.jpg" />
+    <Content Include="Style\images\email.swf" />
+    <Content Include="Style\images\email2.jpg" />
+    <Content Include="Style\images\facilities.jpg" />
+    <Content Include="Style\images\failed.gif" />
+    <Content Include="Style\images\feedback.swf" />
+    <Content Include="Style\images\first_product.bmp" />
+    <Content Include="Style\images\forgot_password.gif" />
+    <Content Include="Style\images\forgot_passwordA.gif" />
+    <Content Include="Style\images\forgot_passwordB.gif" />
+    <Content Include="Style\images\forgot_password_banner.gif" />
+    <Content Include="Style\images\frank016-lo_res.jpg" />
+    <Content Include="Style\images\freight_watermark.png" />
+    <Content Include="Style\images\google_maps.jpg" />
+    <Content Include="Style\images\hard_hat_exp.png" />
+    <Content Include="Style\images\home-bottom-bg.jpg" />
+    <Content Include="Style\images\home.gif" />
+    <Content Include="Style\images\homeb.gif" />
+    <Content Include="Style\images\ico-ar.gif" />
+    <Content Include="Style\images\ico-pdf.gif" />
+    <Content Include="Style\images\ico-rss.gif" />
+    <Content Include="Style\images\img-1.jpg" />
+    <Content Include="Style\images\Inquire.jpg" />
+    <Content Include="Style\images\Inquire.png" />
+    <Content Include="Style\images\item-bg-hover.jpg" />
+    <Content Include="Style\images\item-bg.jpg" />
+    <Content Include="Style\images\item-bg_button.png" />
+    <Content Include="Style\images\Jake_Garrett.jpg" />
+    <Content Include="Style\images\Jeremy_Cronkhite.jpg" />
+    <Content Include="Style\images\Jim_Hoppes.jpg" />
+    <Content Include="Style\images\jim_wroble.jpg" />
+    <Content Include="Style\images\johnny_brewer.jpg" />
+    <Content Include="Style\images\john_petrie.bmp" />
+    <Content Include="Style\images\John_Petrie.jpg" />
+    <Content Include="Style\images\John_Wassell.jpg" />
+    <Content Include="Style\images\Jonathan_Milk.jpg" />
+    <Content Include="Style\images\Jordan_Burkholder.jpg" />
+    <Content Include="Style\images\Josh_Horning.jpg" />
+    <Content Include="Style\images\Keith_Padgett.jpg" />
+    <Content Include="Style\images\kelly_haupert.jpg" />
+    <Content Include="Style\images\kelly_penrod.bmp" />
+    <Content Include="Style\images\Kelly_Penrod.jpg" />
+    <Content Include="Style\images\Kenny_Rampolla.jpg" />
+    <Content Include="Style\images\kenny_rampolla.png" />
+    <Content Include="Style\images\ken_rampolla.jpg" />
+    <Content Include="Style\images\kevin_Perela.jpg" />
+    <Content Include="Style\images\key.png" />
+    <Content Include="Style\images\Kirkwood_logo.jpg" />
+    <Content Include="Style\images\Kirkwood_logo2.bmp" />
+    <Content Include="Style\images\Kirkwood_logo2.png" />
+    <Content Include="Style\images\laura_minnick.bmp" />
+    <Content Include="Style\images\Laura_Starkey.jpg" />
+    <Content Include="Style\images\liquid_ladle.JPG" />
+    <Content Include="Style\images\lisa_bennett.bmp" />
+    <Content Include="Style\images\Lisa_Bennett.jpg" />
+    <Content Include="Style\images\littlemap.gif" />
+    <Content Include="Style\images\littlemap2.gif" />
+    <Content Include="Style\images\littlemap3.gif" />
+    <Content Include="Style\images\Liz_Lentis.jpg" />
+    <Content Include="Style\images\loading.gif" />
+    <Content Include="Style\images\loading_background.png" />
+    <Content Include="Style\images\LOCK.png" />
+    <Content Include="Style\images\login.swf" />
+    <Content Include="Style\images\logo.gif" />
+    <Content Include="Style\images\logo.jpg" />
+    <Content Include="Style\images\logo.png" />
+    <Content Include="Style\images\logo2.gif" />
+    <Content Include="Style\images\log_in_info.gif" />
+    <Content Include="Style\images\Lori_Shuler.jpg" />
+    <Content Include="Style\images\Manage_Users.png" />
+    <Content Include="Style\images\map\new_map.gif" />
+    <Content Include="Style\images\map\oldMap\map.jpg" />
+    <Content Include="Style\images\map\oldMap\new_map.gif" />
+    <Content Include="Style\images\map\oldMap\new_map.jpg" />
+    <Content Include="Style\images\map\oldMap\new_map.old.gif" />
+    <Content Include="Style\images\map\oldMap\new_map2.GIF" />
+    <Content Include="Style\images\map\oldMap\USA.jpg" />
+    <Content Include="Style\images\map\sales_map-BAR.jpg" />
+    <Content Include="Style\images\map\sales_map-base.jpg" />
+    <Content Include="Style\images\map\sales_map-CA.jpg" />
+    <Content Include="Style\images\map\sales_map-FL.jpg" />
+    <Content Include="Style\images\map\sales_map-HOME.jpg" />
+    <Content Include="Style\images\map\sales_map-NE-AR.jpg" />
+    <Content Include="Style\images\map\sales_map-NE.jpg" />
+    <Content Include="Style\images\map\sales_map-ON.jpg" />
+    <Content Include="Style\images\map\sales_map-outline.jpg" />
+    <Content Include="Style\images\map\sales_map-TX.jpg" />
+    <Content Include="Style\images\map\sales_map-WEST.jpg" />
+    <Content Include="Style\images\mark_bisbing.jpg" />
+    <Content Include="Style\images\michael_busse.jpg" />
+    <Content Include="Style\images\msds_vault.png" />
+    <Content Include="Style\images\newbody.jpg" />
+    <Content Include="Style\images\newcust.swf" />
+    <Content Include="Style\images\news.swf" />
+    <Content Include="Style\images\nick_jenks.jpg" />
+    <Content Include="Style\images\Nicole_Happel.jpg" />
+    <Content Include="Style\images\no_photo_available.bmp" />
+    <Content Include="Style\images\no_photo_available.png" />
+    <Content Include="Style\images\nudge-pointer.gif" />
+    <Content Include="Style\images\office_report_sm.png" />
+    <Content Include="Style\images\old_side.png" />
+    <Content Include="Style\images\paul_kotsenas.bmp" />
+    <Content Include="Style\images\Paul_Yengst.jpg" />
+    <Content Include="Style\images\pdf.png" />
+    <Content Include="Style\images\pdficon_large.png" />
+    <Content Include="Style\images\pdf_icon.png" />
+    <Content Include="Style\images\Penn_Whitlow.jpg" />
+    <Content Include="Style\images\pittenger019-lo_res.jpg" />
+    <Content Include="Style\images\pointer-2.gif" />
+    <Content Include="Style\images\pointer-3.png" />
+    <Content Include="Style\images\pointer-3_dark.png" />
+    <Content Include="Style\images\pointer-bc.png" />
+    <Content Include="Style\images\pointer.gif" />
+    <Content Include="Style\images\print.png" />
+    <Content Include="Style\images\print_lbl.png" />
+    <Content Include="Style\images\profile_watermark.png" />
+    <Content Include="Style\images\RAIL_sm.png" />
+    <Content Include="Style\images\red_head.png" />
+    <Content Include="Style\images\Rees_Evans.jpg" />
+    <Content Include="Style\images\Register.jpg" />
+    <Content Include="Style\images\Register.png" />
+    <Content Include="Style\images\register.swf" />
+    <Content Include="Style\images\reg_banner.gif" />
+    <Content Include="Style\images\Request.jpg" />
+    <Content Include="Style\images\Request.png" />
+    <Content Include="Style\images\rmi_logo.png" />
+    <Content Include="Style\images\rmi_logo2.jpg" />
+    <Content Include="Style\images\rmi_logo3.bmp" />
+    <Content Include="Style\images\Robert_Carter.jpg" />
+    <Content Include="Style\images\rob_carter.bmp" />
+    <Content Include="Style\images\rob_king.jpg" />
+    <Content Include="Style\images\rob_simon.bmp" />
+    <Content Include="Style\images\rob_simon.jpg" />
+    <Content Include="Style\images\roxy_hagans.bmp" />
+    <Content Include="Style\images\Roxy_Hagans.jpg" />
+    <Content Include="Style\images\Ryan_Angst.jpg" />
+    <Content Include="Style\images\sales_loading.gif" />
+    <Content Include="Style\images\sample_user.png" />
+    <Content Include="Style\images\sandy_swing.bmp" />
+    <Content Include="Style\images\Sandy_Swing.jpg" />
+    <Content Include="Style\images\sdi_corporate.jpg" />
+    <Content Include="Style\images\sdi_flatroll.jpg" />
+    <Content Include="Style\images\SDI_LOC_LOGO.jpg" />
+    <Content Include="Style\images\SDI_LOGO.bmp" />
+    <Content Include="Style\images\sdi_logo.gif" />
+    <Content Include="Style\images\sdi_logo2.gif" />
+    <Content Include="Style\images\sdi_logo_w_location.jpg" />
+    <Content Include="Style\images\SDI_SALES_LOGO.jpg" />
+    <Content Include="Style\images\SDI_SALES_LOGO2.jpg" />
+    <Content Include="Style\images\SDI_Spinner_large.gif" />
+    <Content Include="Style\images\SDI_Spinner_med.gif" />
+    <Content Include="Style\images\SDI_Spinner_small.gif" />
+    <Content Include="Style\images\SDI_SR_Div_logo_sm.png" />
+    <Content Include="Style\images\SDI_SR_Div_logo_sm_hover.png" />
+    <Content Include="Style\images\Sheila_Curry.jpg" />
+    <Content Include="Style\images\sitemap.swf" />
+    <Content Include="Style\images\sorry.swf" />
+    <Content Include="Style\images\spacer.gif" />
+    <Content Include="Style\images\spinner.gif" />
+    <Content Include="Style\images\spinner_small.gif" />
+    <Content Include="Style\images\SRD_aerial.jpg" />
+    <Content Include="Style\images\SRD_Exterior.png" />
+    <Content Include="Style\images\SRD_Exterior2.jpg" />
+    <Content Include="Style\images\SRD_Exterior3.jpg" />
+    <Content Include="Style\images\srd_photo.JPG" />
+    <Content Include="Style\images\Stephan_Ferenczy.jpg" />
+    <Content Include="Style\images\swing.jpg" />
+    <Content Include="Style\images\tab-active-left.gif" />
+    <Content Include="Style\images\tab-active-right.gif" />
+    <Content Include="Style\images\tab-active.gif" />
+    <Content Include="Style\images\tab-hover-left.gif" />
+    <Content Include="Style\images\tab-hover-right2.gif" />
+    <Content Include="Style\images\tab-hover.gif" />
+    <Content Include="Style\images\tab-left.gif" />
+    <Content Include="Style\images\tab-line.gif" />
+    <Content Include="Style\images\tab-right.gif" />
+    <Content Include="Style\images\tab.gif" />
+    <Content Include="Style\images\TBD.jpg" />
+    <Content Include="Style\images\temp_photo.jpg" />
+    <Content Include="Style\images\timeout.swf" />
+    <Content Include="Style\images\Timothy_Semonich.jpg" />
+    <Content Include="Style\images\Todd_Bashford.jpg" />
+    <Content Include="Style\images\Tom_Lutes.jpg" />
+    <Content Include="Style\images\top_h.jpg" />
+    <Content Include="Style\images\tour_movie.swf" />
+    <Content Include="Style\images\Troy_Bayman.jpg" />
+    <Content Include="Style\images\truck_button.png" />
+    <Content Include="Style\images\users_watermark.png" />
+    <Content Include="Style\images\user_icon.png" />
+    <Content Include="Style\images\utilities-bg.bmp" />
+    <Content Include="Style\images\utilities_link.png" />
+    <Content Include="Style\images\vcard.png" />
+    <Content Include="Style\images\vertical_divider.png" />
+    <Content Include="Style\images\wc_member.gif" />
+    <Content Include="Style\images\wc_member_orig.gif" />
+    <Content Include="Style\images\web_maint.png" />
+    <Content Include="Style\images\welcome-bg.bmp" />
+    <Content Include="Style\images\welcome-bg.jpg" />
+    <Content Include="Style\images\welcome-bg2.jpg" />
+    <Content Include="Style\images\welcome.jpg" />
+    <Content Include="Style\images\wendy_schart.jpg" />
+    <Content Include="Style\images\white.gif" />
+    <Content Include="Style\images\white_arrow.gif" />
+    <Content Include="Style\images\Wideflange.jpg" />
+    <Content Include="Style\images\XLS_icon.png" />
+    <Content Include="Style\images\yury_krotov.bmp" />
+    <Content Include="Style\images\_vti_cnf\021908_265_painted-steel.jpg" />
+    <Content Include="Style\images\_vti_cnf\asc.gif" />
+    <Content Include="Style\images\_vti_cnf\bg-body.gif" />
+    <Content Include="Style\images\_vti_cnf\bg-content-home.gif" />
+    <Content Include="Style\images\_vti_cnf\bg-content.gif" />
+    <Content Include="Style\images\_vti_cnf\bg-footer.gif" />
+    <Content Include="Style\images\_vti_cnf\bg-holder.gif" />
+    <Content Include="Style\images\_vti_cnf\bg-info.gif" />
+    <Content Include="Style\images\_vti_cnf\bg-lincks-block.gif" />
+    <Content Include="Style\images\_vti_cnf\bg-next.gif" />
+    <Content Include="Style\images\_vti_cnf\bg-prev.gif" />
+    <Content Include="Style\images\_vti_cnf\bg-show-block.png" />
+    <Content Include="Style\images\_vti_cnf\bg-title-dev.gif" />
+    <Content Include="Style\images\_vti_cnf\bg.gif" />
+    <Content Include="Style\images\_vti_cnf\bg_header.jpg" />
+    <Content Include="Style\images\_vti_cnf\bigphoto.jpg" />
+    <Content Include="Style\images\_vti_cnf\border.png" />
+    <Content Include="Style\images\_vti_cnf\bulet-2.gif" />
+    <Content Include="Style\images\_vti_cnf\bulet.gif" />
+    <Content Include="Style\images\_vti_cnf\bullet-red.gif" />
+    <Content Include="Style\images\_vti_cnf\controls.png" />
+    <Content Include="Style\images\_vti_cnf\desc.gif" />
+    <Content Include="Style\images\_vti_cnf\facilities.jpg" />
+    <Content Include="Style\images\_vti_cnf\glenn-sig.gif" />
+    <Content Include="Style\images\_vti_cnf\home-bottom-bg.jpg" />
+    <Content Include="Style\images\_vti_cnf\ico-ar.gif" />
+    <Content Include="Style\images\_vti_cnf\ico-pdf.gif" />
+    <Content Include="Style\images\_vti_cnf\ico-rss.gif" />
+    <Content Include="Style\images\_vti_cnf\img-1.jpg" />
+    <Content Include="Style\images\_vti_cnf\item-bg-hover.jpg" />
+    <Content Include="Style\images\_vti_cnf\item-bg.jpg" />
+    <Content Include="Style\images\_vti_cnf\loading.gif" />
+    <Content Include="Style\images\_vti_cnf\loading_background.png" />
+    <Content Include="Style\images\_vti_cnf\logo.gif" />
+    <Content Include="Style\images\_vti_cnf\logo.png" />
+    <Content Include="Style\images\_vti_cnf\nudge-pointer.gif" />
+    <Content Include="Style\images\_vti_cnf\pdf.png" />
+    <Content Include="Style\images\_vti_cnf\pointer-2.gif" />
+    <Content Include="Style\images\_vti_cnf\pointer-3.png" />
+    <Content Include="Style\images\_vti_cnf\pointer-bc.gif" />
+    <Content Include="Style\images\_vti_cnf\pointer.gif" />
+    <Content Include="Style\images\_vti_cnf\print.png" />
+    <Content Include="Style\images\_vti_cnf\products.jpg" />
+    <Content Include="Style\images\_vti_cnf\pushis.jpg" />
+    <Content Include="Style\images\_vti_cnf\vcard.png" />
+    <Content Include="Style\images\_vti_cnf\welcome-bg.jpg" />
+    <Content Include="Style\js\chili-1.7.pack.js" />
+    <Content Include="Style\js\htmltooltip.js" />
+    <Content Include="Style\js\ie-hover.js" />
+    <Content Include="Style\js\jquery-1.2.6.js" />
+    <Content Include="Style\js\jquery-1.5.min.js" />
+    <Content Include="Style\js\jquery.accordion.js" />
+    <Content Include="Style\js\jquery.colorbox.js" />
+    <Content Include="Style\js\jquery.cycle.all.2.74.js" />
+    <Content Include="Style\js\jquery.cycle.all.min.js" />
+    <Content Include="Style\js\jquery.dimensions.js" />
+    <Content Include="Style\js\jquery.easing.js" />
+    <Content Include="Style\js\jquery.hoverimagetext.js" />
+    <Content Include="Style\js\jquery.min.js" />
+    <Content Include="Style\js\jquery.tablesorter.min.js" />
+    <Content Include="Style\js\rotateReports.js" />
+    <Content Include="Style\js\thickbox.js" />
+    <Content Include="Style\js\_vti_cnf\chili-1.7.pack.js" />
+    <Content Include="Style\js\_vti_cnf\htmltooltip.js" />
+    <Content Include="Style\js\_vti_cnf\ie-hover.js" />
+    <Content Include="Style\js\_vti_cnf\jquery-1.2.6.js" />
+    <Content Include="Style\js\_vti_cnf\jquery-1.5.min.js" />
+    <Content Include="Style\js\_vti_cnf\jquery.accordion.js" />
+    <Content Include="Style\js\_vti_cnf\jquery.colorbox.js" />
+    <Content Include="Style\js\_vti_cnf\jquery.cycle.all.2.74.js" />
+    <Content Include="Style\js\_vti_cnf\jquery.cycle.all.min.js" />
+    <Content Include="Style\js\_vti_cnf\jquery.dimensions.js" />
+    <Content Include="Style\js\_vti_cnf\jquery.easing.js" />
+    <Content Include="Style\js\_vti_cnf\jquery.hoverimagetext.js" />
+    <Content Include="Style\js\_vti_cnf\jquery.min.js" />
+    <Content Include="Style\js\_vti_cnf\jquery.tablesorter.min.js" />
+    <Content Include="Style\js\_vti_cnf\thickbox.js" />
+    <Content Include="Style\MainSlider\data1\images\construction_9.jpg" />
+    <Content Include="Style\MainSlider\data1\images\crane_2.jpg" />
+    <Content Include="Style\MainSlider\data1\images\dual_cast.jpg" />
+    <Content Include="Style\MainSlider\data1\images\rail_005.jpg" />
+    <Content Include="Style\MainSlider\data1\images\rail_008.jpg" />
+    <Content Include="Style\MainSlider\data1\images\wideflange.jpg" />
+    <Content Include="Style\MainSlider\data1\tooltips\construction_9.jpg" />
+    <Content Include="Style\MainSlider\data1\tooltips\crane_2.jpg" />
+    <Content Include="Style\MainSlider\data1\tooltips\dual_cast.jpg" />
+    <Content Include="Style\MainSlider\data1\tooltips\rail_005.jpg" />
+    <Content Include="Style\MainSlider\data1\tooltips\rail_008.jpg" />
+    <Content Include="Style\MainSlider\data1\tooltips\wideflange.jpg" />
+    <Content Include="Style\MainSlider\engine1\arrow-next.png" />
+    <Content Include="Style\MainSlider\engine1\arrow-prev.png" />
+    <Content Include="Style\MainSlider\engine1\arrows.png" />
+    <Content Include="Style\MainSlider\engine1\bullet.png" />
+    <Content Include="Style\MainSlider\engine1\fullscreen.png" />
+    <Content Include="Style\MainSlider\engine1\jquery.js" />
+    <Content Include="Style\MainSlider\engine1\pause.png" />
+    <Content Include="Style\MainSlider\engine1\play.png" />
+    <Content Include="Style\MainSlider\engine1\script.js" />
+    <Content Include="Style\MainSlider\engine1\style.css" />
+    <Content Include="Style\MainSlider\engine1\style.mod.css" />
+    <Content Include="Style\MainSlider\engine1\triangle.png" />
+    <Content Include="Style\MainSlider\engine1\wowslider.js" />
+    <Content Include="Style\MainSlider\engine1\wowslider.mod.js" />
+    <Content Include="Style\MainSlider\iframe_index.html" />
+    <Content Include="Style\MainSlider\index.html" />
+    <Content Include="Style\pdf_style.css" />
+    <Content Include="Style\print.css" />
+    <Content Include="Style\SalesReport.css" />
+    <Content Include="Style\style.css" />
+    <Content Include="Style\style2.css" />
+    <Content Include="Style\style3.css" />
+    <Content Include="Style\TabStyle.css" />
+    <Content Include="Style\_vti_cnf\ie.css" />
+    <Content Include="Style\_vti_cnf\print.css" />
+    <Content Include="Style\_vti_cnf\style.css" />
+    <Content Include="ViewSwitcher.ascx" />
+    <Content Include="Web.config" />
+    <Content Include="Bundle.config" />
+    <Content Include="Master\Site.Mobile.Master" />
+    <Content Include="Style\content\12\d_SDI_Recycled_Content_Letter.pdf" />
+    <Content Include="Style\content\13\d_ABS.pdf" />
+    <Content Include="Style\content\14\d_ISO_9001_2008.pdf" />
+    <Content Include="Style\content\15\creditapplication.pdf" />
+    <Content Include="Style\content\16\StandardTermsandConditionsUS.pdf" />
+    <Content Include="Style\content\33\d_Structural_Claim_Procedure.pdf" />
+    <Content Include="Style\content\34\d_Structural_Claim_Form.pdf" />
+    <Content Include="Style\content\35\d_Rail_Claim_Procedure.pdf" />
+    <Content Include="Style\content\37\Rail_Claim_Form.pdf" />
+    <Content Include="Style\content\49\d_AARCert.pdf" />
+    <Content Include="Style\content\52\d_Beam_Price_List.pdf" />
+    <Content Include="Style\content\53\Merchant_Price_List.pdf" />
+    <Content Include="Style\content\55\Merchant_Price_Announcement.pdf" />
+    <Content Include="Style\content\5\d_Price_announce.pdf" />
+    <Content Include="Style\content\6\Rolling_Schedule.pdf" />
+    <Content Include="Style\content\7\d_bundle_chart.pdf" />
+    <Content Include="Style\content\8\SDI-CCI_Product_Catalog.pdf" />
+    <Content Include="Style\content\9\d_SRD_Plant_Capabilities.pdf" />
+    <Content Include="Style\content\desktop.ini" />
+    <Content Include="Style\images\map.psd" />
+    <Content Include="Style\images\map\new_map.xcf" />
+    <Content Include="Style\images\map\oldMap\Thumbs.db" />
+    <Content Include="Style\images\map\Thumbs.db" />
+    <Content Include="Style\images\Thumbs.db" />
+    <Content Include="Style\images\_vti_cnf\Thumbs.db" />
+    <Content Include="Style\MainSlider\data1\images\Thumbs.db" />
+    <Content Include="Style\MainSlider\data1\tooltips\Thumbs.db" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="About\Capabilities.aspx.cs">
+      <DependentUpon>Capabilities.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="About\Capabilities.aspx.designer.cs">
+      <DependentUpon>Capabilities.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="About\company-overview.aspx.cs">
+      <DependentUpon>company-overview.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="About\company-overview.aspx.designer.cs">
+      <DependentUpon>company-overview.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Contact.aspx.cs">
+      <DependentUpon>Contact.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contact.aspx.designer.cs">
+      <DependentUpon>Contact.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Master\About.Master.cs">
+      <DependentUpon>About.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Master\About.Master.designer.cs">
+      <DependentUpon>About.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Master\Site.Master.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Master\Site.Master.designer.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Master\Site.Mobile.Master.cs">
+      <DependentUpon>Site.Mobile.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Master\Site.Mobile.Master.designer.cs">
+      <DependentUpon>Site.Mobile.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Security\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Security\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewSwitcher.ascx.cs">
+      <DependentUpon>ViewSwitcher.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewSwitcher.ascx.designer.cs">
+      <DependentUpon>ViewSwitcher.ascx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.3.1.min.map" />
+    <Content Include="Style\CSS\form-sdi.css-carlos" />
+    <Content Include="Style\CSS\tables.css.bak" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>56833</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:56833/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

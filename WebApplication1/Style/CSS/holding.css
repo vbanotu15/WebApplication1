@@ -1,0 +1,105 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+margin: 0;
+padding: 0;
+border: 0;
+outline: 0;
+font-weight: inherit;
+font-style: inherit;
+font-size: 1em; /* font size of the body based on the browser 16px */
+font-size: 100%;
+font-family: inherit;
+vertical-align: baseline;
+list-style-type: none;
+}
+
+html, body {-webkit-text-size-adjust: 100%;}
+
+font-family: 'Montserrat', sans-serif;
+font-family: 'Lora', serif;
+font-family: 'Muli', sans-serif;
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+	}
+/* remember to define focus styles! */
+:focus {
+	outline: 0;
+}
+
+img, object, video, embed {
+	max-width: 100%;
+}
+
+
+body {
+padding-right: 0px;
+background-color: #FFFFFF;
+margin-top:0px;
+font-size: 1em; /* font size of the body based on the browser 16px **/
+font-size: 100%;
+}
+
+body h1 {
+display: none;
+text-indent: -5000px;
+}
+
+#wrapper {
+width: 100%;/*Holding OuterMost 1200px*/
+background-color:#FFFFFF;
+max-width: 960px;
+margin-left: auto;
+margin-right: auto;
+}
+
+
+
+/*Tablet*/
+@media screen and (max-width: 768px) and (min-width: 481px) {
+#wrapper {
+width: 100%;/*Holding OuterMost 768px*/
+max-width: 768px;
+margin-left: 0px;
+margin-right: 0px;
+margin-top:0px
+}
+
+
+
+}
+
+
+@media only screen and (max-width: 480px) and (min-width: 321px) { /*Large Smart Phone*/
+
+#wrapper {
+width: 100%;/*Holding OuterMost 480px*/
+max-width: 480px;
+margin-left: 0px;
+margin-right: 0px;
+}
+
+
+
+}
+
+
+
+@media only screen and (max-width: 320px) {
+	
+#wrapper {
+width: 100%;/*Holding OuterMost 320px*/
+max-width: 320px;
+margin-left: 0px;
+margin-right: 0px;
+}
+
+}
