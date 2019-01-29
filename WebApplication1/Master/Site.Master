@@ -8,7 +8,10 @@
     <title>Structural Steel – Beams and Channel Supply – Steel Dynamics</title>
     <link rel="canonical" href="https://www.sdi-structural.com/index.html">
     <link href="../Style/css/main-sdi-structural.css" rel="stylesheet" type="text/css">
+    <link href="../Style/CSS/tier2-sdi-structural.css" rel="stylesheet" />
+
     <link href="../Style/css/nivo-slider-sdi.css" rel="stylesheet" type="text/css">
+
     <link href="//fonts.googleapis.com/css?family=Montserrat:400,700|Lora:400,400italic,700,700italic|Muli:400,300italic,300" rel="stylesheet" type="text/css">
     <!--[if lt IE 9]>
 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -16,8 +19,6 @@
     <script src="../js/modernizr-custom.js"></script>
     <link rel="shortcut icon" href="https://www.sdi-structural.com/favicon.ico">
 </head>
-
-
 <body>
     <form id="form1" runat="server">
         <h1>Steel Dynamics Structural Rail Division</h1>
@@ -28,7 +29,7 @@
                     <div class="logocontainer">
                         <div class="logo" title="Steel Dynamics Structural and Rail Division">
                             <a href="../default.aspx">
-                                <img src="../Images/home/steel-dynamics-rail-division-logo.svg" alt="Steel Dynamics Structural and Rail Division" /></a>
+                                <img src="../../Images/home/steel-dynamics-rail-division-logo.svg" alt="Steel Dynamics Structural and Rail Division" /></a>
                         </div>
                     </div>
 
@@ -47,10 +48,10 @@
                     <ul class="simple-toggle" id="menu">
                         <li><a href="../Default.aspx">Home</a></li>
                         <li><a href="../about/company-overview.aspx">About</a></li>
-                        <li><a href="structural-products/products-overview.aspx">Structural Products</a></li>
-                        <li><a href="resources/resources-overview.aspx">Resources</a></li>
-                        <li><a href="contact/structural-contact-us.aspx">Contact</a></li>
-                        <li><a href="contact/structural-request-quote.aspx">Request Quote</a></li>
+                        <li><a href="../../structural-products/products-overview.aspx">Structural Products</a></li>
+                        <li><a href="../resources/resources-overview.aspx">Resources</a></li>
+                        <li><a href="../contact/structural-contact-us.aspx">Contact</a></li>
+                        <li><a href="../contact/structural-request-quote.aspx">Request Quote</a></li>
                     </ul>
                 </nav>
             </header>
@@ -101,23 +102,23 @@
             <!-- the footer -->
             <footer>
                 <ul>
-                    <li><a href="../index.html">Home</a></li>
-                    <li><a href="company-overview.html">About</a></li>
-                    <li><a href="../structural-products/products-overview.html">Structural Products</a></li>
-                    <li><a href="../resources/resources-overview.html">Resources</a></li>
-                    <li><a href="../contact/structural-contact-us.php">Contact</a></li>
-                    <li><a href="../contact/structural-request-quote.php">Request Quote</a></li>
+                    <li><a href="../index.aspx">Home</a></li>
+                    <li><a href="../About/company-overview.aspx">About</a></li>
+                    <li><a href="../structural-products/products-overview.aspx">Structural Products</a></li>
+                    <li><a href="../resources/resources-overview.aspx">Resources</a></li>
+                    <li><a href="../contact/structural-contact-us.aspx">Contact</a></li>
+                    <li><a href="../contact/structural-request-quote.aspx">Request Quote</a></li>
                 </ul>
                 <div class="LeftColumn">
                     <ul>
                         <li><a href="about/web-policy.aspx">Web Policy/Fwd Look</a></li>
-                        <li><a href="sitemap.aspx">Site Map</a></li>
+                        <li><a href="Sitemap.aspx">Site Map</a></li>
                     </ul>
                 </div>
 
                 <div class="RightColumn">
                     <a href="http://www.steeldynamics.com/" target="_blank">
-                        <img src="../Images/home/sdi-steel-dynamics-logo.png" alt="SDI Steel Dynamics, Inc" title="SDI Steel Dynamics, Inc" /></a>
+                        <img src="../../Images/home/sdi-steel-dynamics-logo.png" alt="SDI Steel Dynamics, Inc" title="SDI Steel Dynamics, Inc" /></a>
                 </div>
                 <div class="clear"></div>
 

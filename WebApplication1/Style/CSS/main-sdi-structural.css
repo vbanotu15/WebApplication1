@@ -533,16 +533,17 @@ background-repeat: no-repeat;
 
 
 footer {
-width: 89.83333333333333%; /*1078px ÷ 1200px*/
-	margin-left: 	3.339517625231911%; /*36px ÷ 1078px*/
-	margin-right: 3.339517625231911%; /*36px ÷ 1078px*/
-margin-top: 25px;
-margin-bottom: 25px;
-background-color:#f9f9f9;
-padding-top:25px;
-padding-bottom:25px;
-padding-right:25px;
-padding-left:25px; 
+    width: 89.83333333333333%; /*1078px ÷ 1200px*/
+    margin-left: 3.339517625231911%; /*36px ÷ 1078px*/
+    margin-right: 3.339517625231911%; /*36px ÷ 1078px*/
+    margin-top: 25px;
+    margin-bottom: 25px;
+    background-color: #f9f9f9;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    padding-right: 25px;
+    padding-left: 25px;
+    
 }
 
 footer p {

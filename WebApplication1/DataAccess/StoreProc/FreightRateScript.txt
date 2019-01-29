@@ -1,0 +1,105 @@
+--1--
+											  
+
+CREATE OR REPLACE PROCEDURE SPDEV_FrightRate_Search(city_ IN varchar,zip_ IN varchar,cursor_ OUT SYS_REFCURSOR)
+AS
+
+BEGIN
+
+OPEN cursor_ FOR    
+     
+        SELECT 
+        CITY AS CITY, 
+        STATE AS STATE, 
+        POSTAL_CODE AS POSTAL_CODE, 
+        TRANS_MODE AS TRANS_MODE, 
+        VEHICLE_GROUP_ID AS VEHICLE_GROUP_ID, 
+        RATE AS RATE, 
+        RATE_UOM AS RATE_UOM, 
+        VEHICLE_DESC AS VEHICLE_DESC
+        FROM OVDBA.V_PUBLIC_FREIGHT_AVG V_PUBLIC_FREIGHT_AVG
+        WHERE CITY = city_ or POSTAL_CODE = zip_ 
+        order by city, STATE, TRANS_MODE, VEHICLE_GROUP_ID;              
+                  
+END;
+
+--2--
+
+CREATE OR REPLACE PROCEDURE SPDEV_FrightRate_Search(as_city IN varchar,as_postal_code IN varchar,cursor_ OUT SYS_REFCURSOR)
+AS
+
+BEGIN
+
+OPEN cursor_ FOR    
+
+SELECT LOCATION, '$' || RATE as RATE, ZIP_LENGTH, VEHICLE_ID, VEHICLE_GROUP_ID, STATE, CITY, POSTAL_CODE,
+ (SELECT 
+  NVL(FSC.SALES_PCT,0)
+FROM
+    FUEL_SURCHARGE FSC,
+    CARRIER C
+WHERE  
+        FSC.CARRIER_ID = 539
+    AND C.CARRIER_ID = FSC.CARRIER_ID
+    AND FSC.ACTIVE = 1
+    AND FSC.START_DATE <= TRIM(SYSDATE)
+    AND FSC.END_DATE >= TRIM(SYSDATE)
+    AND ROWNUM = 1) AS TRUCK_SURCHARGE
+FROM
+(
+SELECT      CASE WHEN CITY IS NULL THEN STATE || ' (' || POSTAL_CODE || ')' ELSE CITY || ', ' || STATE || ' (' || POSTAL_CODE || ')' END AS LOCATION,
+                RATE,
+            'ZIP5' AS ZIP_LENGTH,
+            (SELECT DISPLAY_NAME FROM VEHICLE_GROUP VG WHERE VG.VEHICLE_GROUP_ID = ZIP5.VEHICLE_GROUP_ID) AS VEHICLE_ID,
+            VEHICLE_GROUP_ID,
+            STATE,
+            CITY,
+                POSTAL_CODE
+FROM TMS_FREIGHT_ZIP5_AVG    ZIP5
+WHERE
+            LOWER(NVL(ZIP5.POSTAL_CODE, ' ' )) = CASE WHEN as_postal_code = '' THEN LOWER(NVL(ZIP5.POSTAL_CODE, ' ' )) 
+                                                WHEN as_postal_code = '%' THEN LOWER(NVL(ZIP5.POSTAL_CODE, ' ' )) 
+                                                WHEN as_postal_code IS NULL THEN LOWER(NVL(ZIP5.POSTAL_CODE, ' ' ))
+                                                ELSE LOWER(as_postal_code) END 
+            AND ZIP5.TRANS_MODE IN ('TRUCK', 'RAIL')
+            AND ZIP5.VEHICLE_GROUP_ID IN ( 10, 11 )
+            AND LOWER( ZIP5.CITY ) = CASE as_city WHEN '%' THEN LOWER( ZIP5.CITY ) ELSE LOWER( as_city ) END
+UNION ALL 
+SELECT LOCATION, RATE, ZIP_LENGTH, VEHICLE_ID, VEHICLE_GROUP_ID, STATE, CITY, POSTAL_CODE
+FROM
+(        
+SELECT      CASE WHEN CITY IS NULL THEN STATE || ' (' || POSTAL_CODE || '+)' ELSE CITY || ', ' || STATE || ' (' || POSTAL_CODE || '+)' END AS LOCATION,
+                RATE,
+            'ZIP3' AS ZIP_LENGTH,
+            (SELECT DISPLAY_NAME FROM VEHICLE_GROUP VG WHERE VG.VEHICLE_GROUP_ID = ZIP3.VEHICLE_GROUP_ID) AS VEHICLE_ID,
+            VEHICLE_GROUP_ID,
+            STATE, 
+            CITY,
+                POSTAL_CODE
+FROM TMS_FREIGHT_ZIP3_AVG ZIP3
+WHERE
+                LOWER(NVL(ZIP3.POSTAL_CODE, ' ' )) = CASE WHEN as_postal_code = '' THEN LOWER(NVL(ZIP3.POSTAL_CODE, ' ' ))
+                                                WHEN as_postal_code = '%' THEN LOWER(NVL(ZIP3.POSTAL_CODE, ' ' ))
+                                                WHEN as_postal_code IS NULL THEN LOWER(NVL(ZIP3.POSTAL_CODE, ' ' ))
+                                                ELSE LOWER( SUBSTR( as_postal_code, 1, 3 ) ) END
+            AND ZIP3.TRANS_MODE IN ('TRUCK', 'RAIL') 
+            AND ZIP3.VEHICLE_GROUP_ID IN ( 10, 11 )
+            AND NVL(ZIP3.CITY, ' ' ) = CASE as_city WHEN '%' THEN ' ' ELSE LOWER( as_city ) END
+)
+WHERE VEHICLE_ID NOT IN( SELECT (SELECT DISPLAY_NAME FROM VEHICLE_GROUP VG WHERE VG.VEHICLE_GROUP_ID = ZIP5.VEHICLE_GROUP_ID) AS VEHICLE_ID FROM TMS_FREIGHT_ZIP5_AVG    ZIP5
+                                                    WHERE
+                                                    LOWER(NVL(ZIP5.POSTAL_CODE, ' ' )) = CASE WHEN as_postal_code = '' THEN LOWER(NVL(ZIP5.POSTAL_CODE, ' ' )) 
+                                                                                        WHEN as_postal_code = '%' THEN LOWER(NVL(ZIP5.POSTAL_CODE, ' ' )) 
+                                                                                        WHEN as_postal_code IS NULL THEN LOWER(NVL(ZIP5.POSTAL_CODE, ' ' ))
+                                                                                        ELSE LOWER(as_postal_code) END
+                                                    AND ZIP5.TRANS_MODE IN ('TRUCK', 'RAIL')
+                                                    AND ZIP5.VEHICLE_GROUP_ID IN ( 10, 11 ) 
+                                                   AND LOWER( ZIP5.CITY ) = CASE as_city WHEN '%' THEN LOWER( ZIP5.CITY ) ELSE LOWER( as_city ) END)
+                                                  )
+
+--where  lower(city) like lower('Indianapolis%') 
+--order by vehicle_group_Id, nvl(postal_code)
+--ORDER BY ZIP_LENGTH DESC, STATE, CITY, VEHICLE_GROUP_ID
+order by vehicle_group_Id, location
+;
+END;

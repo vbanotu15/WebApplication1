@@ -1,0 +1,222 @@
+--1--
+create or replace view VW_BundleList as (
+SELECT (product_form || product_height) Product,LISTAGG(product_density, ', ')
+         WITHIN GROUP (ORDER BY product_form) "LBFT",bundle_pieces
+         ,(pieces_wide || 'X' || Pieces_high) WxH, product_form,product_height
+  FROM VW_STANDARD_BUNDLE_CONFIG 
+  GROUP BY product_form,product_height,  product_density,bundle_pieces,pieces_wide,Pieces_high);
+
+ --2--
+ CREATE OR REPLACE PROCEDURE SPDEV_BundleList_BeamProduct(cursor_ OUT SYS_REFCURSOR)
+AS
+
+BEGIN
+
+OPEN cursor_ FOR    
+   Select ' All' as Product,'1' as PRODUCT_form,1 as product_height from dual union Select distinct Product,PRODUCT_form, product_height 
+   FROM OVDBA.VW_BundleList WHERE PRODUCT_fORM IN('W','HP','S','M') 
+   order by PRODUCT_form, product_height,Product
+             ;
+END;
+
+--3--
+CREATE OR REPLACE PROCEDURE SPDEV_BundleList_BeamPCS30_65(cursor_ OUT SYS_REFCURSOR)
+AS
+
+BEGIN
+
+OPEN cursor_ FOR    
+   Select ' All' as bundle_pieces, 1 as piece from dual union Select distinct to_char(bundle_pieces) bundle_pieces, bundle_pieces piece 
+   FROM OVDBA.VW_BundleList 
+   WHERE PRODUCT_fORM IN('W','HP','S','M') order by piece asc
+             ;
+END;
+
+--4--
+CREATE OR REPLACE PROCEDURE SPDEV_BundleList_BeamWxH(cursor_ OUT SYS_REFCURSOR)
+AS
+
+BEGIN
+
+OPEN cursor_ FOR    
+   Select ' All' as WxH, 1 as piece from dual union Select distinct to_char(WxH) WxH , 1 as piece 
+   FROM OVDBA.VW_BundleList 
+   WHERE PRODUCT_fORM IN('W','HP','S','M') order by  WxH
+             ;
+END;
+
+--5--
+CREATE OR REPLACE PROCEDURE SPDEV_BundleList_BeamProd_cls(param_ IN varchar, cursor_ OUT SYS_REFCURSOR)
+AS
+
+BEGIN
+
+OPEN cursor_ FOR    
+   Select ' All' as Product,'1' as PRODUCT_form,1 as product_height from dual union 
+   Select distinct Product,PRODUCT_form, product_height 
+   FROM OVDBA.VW_BundleList WHERE PRODUCT_fORM IN('W','HP','S','M') 
+   and PRODUCT_form = param_
+order by PRODUCT_form, product_height,Product
+             ;
+END;
+
+--6--
+CREATE OR REPLACE PROCEDURE SPDEV_BundleList_PCS3065_cls(param_ IN varchar, cursor_ OUT SYS_REFCURSOR)
+AS
+
+BEGIN
+
+OPEN cursor_ FOR    
+   Select ' All' as bundle_pieces, 1 as piece from dual union 
+   Select distinct to_char(bundle_pieces) bundle_pieces, bundle_pieces piece 
+   FROM OVDBA.VW_BundleList WHERE PRODUCT_fORM =  param_
+   order by piece asc
+   ;
+END;
+
+--7--
+CREATE OR REPLACE PROCEDURE SPDEV_BundleList_WxH_cls(param_ IN varchar, cursor_ OUT SYS_REFCURSOR)
+AS
+
+BEGIN
+
+OPEN cursor_ FOR    
+   Select ' All' as WxH, 1 as piece from dual union Select distinct to_char(WxH) WxH , 1 as piece 
+   FROM OVDBA.VW_BundleList WHERE PRODUCT_fORM = param_
+   order by  WxH
+   ;
+END;
+
+--8--
+CREATE OR REPLACE PROCEDURE SPDEV_BundleList_MerProduct(cursor_ OUT SYS_REFCURSOR)
+AS
+
+BEGIN
+
+OPEN cursor_ FOR    
+   Select ' All' as Product,'1' as PRODUCT_form,1 as product_height from dual union 
+   Select distinct Product,PRODUCT_form, product_height 
+   FROM OVDBA.VW_BundleList WHERE PRODUCT_fORM IN('C','MC') 
+   order by PRODUCT_form, product_height,Product
+   ;
+END;
+
+--9--
+ CREATE OR REPLACE PROCEDURE SPDEV_BundleList_MerPCS3065(cursor_ OUT SYS_REFCURSOR)
+AS
+
+BEGIN
+
+OPEN cursor_ FOR    
+   Select ' All' as bundle_pieces, 1 as piece from dual union 
+   Select distinct to_char(bundle_pieces) bundle_pieces, bundle_pieces piece 
+   FROM OVDBA.VW_BundleList WHERE PRODUCT_fORM IN('C','MC') order by piece asc
+   ;
+END;
+
+--10--
+CREATE OR REPLACE PROCEDURE SPDEV_BundleList_MerWxH(cursor_ OUT SYS_REFCURSOR)
+AS
+
+BEGIN
+
+OPEN cursor_ FOR    
+   Select ' All' as WxH, 1 as piece from dual union 
+   Select distinct to_char(WxH) WxH , 1 as piece 
+   FROM OVDBA.VW_BundleList WHERE PRODUCT_fORM IN('C','MC') 
+   order by  WxH
+   ;
+END;
+
+--11--
+CREATE OR REPLACE PROCEDURE SPDEV_BundleList_MerProd_cls(param_ IN varchar, cursor_ OUT SYS_REFCURSOR)
+AS
+
+BEGIN
+
+OPEN cursor_ FOR    
+ Select ' All' as Product,'1' as PRODUCT_form,1 as product_height from dual union 
+ Select distinct Product,PRODUCT_form, product_height 
+ FROM OVDBA.VW_BundleList WHERE PRODUCT_fORM IN('C','MC') 
+ and PRODUCT_form = param_ 
+ order by PRODUCT_form, product_height,Product
+   ;
+END;
+
+--12--
+CREATE OR REPLACE PROCEDURE SPDEV_BundleeList_SEARCH(SECTION_ IN varchar, Product_ IN varchar,bundle_pieces_ IN varchar , WxH_ IN varchar , product_form_ IN varchar , cursor_ OUT SYS_REFCURSOR)
+AS
+
+BEGIN
+
+    IF SECTION_ ='beam' THEN             
+            OPEN cursor_ FOR
+                   
+                SELECT Product, LISTAGG(LBFT,', ') WITHIN GROUP ( ORDER BY product_form || product_height desc ) AS Bundle , bundle_pieces,WxH , product_form,product_height 
+                FROM  OVDBA.VW_BundleList
+                Where Product is not null  and product_form IN('W','HP','S','M') 
+                and Product like Product_ || '%'  and bundle_pieces like bundle_pieces_ || '%'
+                and WxH like WxH_ || '%'  and product_form like product_form_ || '%'
+                GROUP BY Product,bundle_pieces,WxH,product_form,product_height
+                order by product_form,product_height,LBFT asc, bundle_pieces desc
+            ;            
+            
+    ELSIF SECTION_ ='merchant' THEN           
+        
+                 OPEN cursor_ FOR
+                   
+                SELECT Product, LISTAGG(LBFT,', ') WITHIN GROUP ( ORDER BY product_form || product_height desc ) AS Bundle , bundle_pieces,WxH , product_form,product_height 
+                FROM  OVDBA.VW_BundleList
+                Where Product is not null and product_form IN('C','MC')
+                and Product like Product_ || '%'  and bundle_pieces like bundle_pieces_ || '%'
+                and WxH like WxH_ || '%'  and product_form like product_form_ || '%'
+                GROUP BY Product,bundle_pieces,WxH,product_form,product_height
+                order by product_form,product_height,LBFT asc, bundle_pieces desc
+            ;                                       
+    END IF;
+
+END;
+
+--13--
+CREATE OR REPLACE PROCEDURE SPDEV_BundleList_BundleChart(cursor_ OUT SYS_REFCURSOR)
+AS
+
+BEGIN
+
+OPEN cursor_ FOR    
+    select distinct substr(c_prod_size_ID,1,4) PRODUCT,  substr(c_prod_size_ID,6,8) as Thickness,  F_LBS_PER_FT as LBFT, 
+    J_SECTIONS_IN_BUNDLE as PCS_2040 , '' as PCS_4160
+    from OVDBA.V_PUBLIC_INVENTORY where c_prod_class_Id='ANGLE' order by product, lbft asc, pcs_2040 desc
+             ;
+END;
+
+
+--14--  NEW ------------------------------------------
+CREATE OR REPLACE PROCEDURE SPDEV_BundleeList_SEARCH1(SECTION_ IN varchar , cursor_ OUT SYS_REFCURSOR)
+AS
+
+BEGIN
+
+    IF SECTION_ ='beam' THEN             
+            OPEN cursor_ FOR
+                   
+                SELECT Product, LISTAGG(LBFT,', ') WITHIN GROUP ( ORDER BY product_form || product_height desc ) AS Bundle , bundle_pieces,WxH , product_form,product_height 
+                FROM  OVDBA.VW_BundleList
+                Where Product is not null  and product_form IN('W','HP','S','M')                 
+                GROUP BY Product,bundle_pieces,WxH,product_form,product_height
+                order by product_form,product_height,LBFT asc, bundle_pieces desc
+            ;            
+            
+    ELSIF SECTION_ ='merchant' THEN           
+        
+                 OPEN cursor_ FOR
+                   
+                SELECT Product, LISTAGG(LBFT,', ') WITHIN GROUP ( ORDER BY product_form || product_height desc ) AS Bundle , bundle_pieces,WxH , product_form,product_height 
+                FROM  OVDBA.VW_BundleList
+                Where Product is not null and product_form IN('C','MC')               
+                GROUP BY Product,bundle_pieces,WxH,product_form,product_height
+                order by product_form,product_height,LBFT asc, bundle_pieces desc
+            ;                                       
+    END IF;
+
+END;

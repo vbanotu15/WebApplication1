@@ -1,0 +1,115 @@
+create  index PM_SECTION_STOCK_i on PM_SECTION_STOCK ( C_ITEM_ID, C_PROD_SIZE_ID,GRADE ,F_LENGTH );
+					 
+--1--
+
+
+CREATE OR REPLACE PROCEDURE SPDEV_INVList_ProdSize(cursor_ OUT SYS_REFCURSOR)
+AS
+
+BEGIN
+
+OPEN cursor_ FOR    
+   Select ' All' as c_Prod_Size_Id, '1' as C_Prod_Class_Id, 1 as  J_Height, '1' as aa from dual  union 
+   select distinct c_Prod_Size_Id,C_Prod_Class_Id,J_Height, substr(c_Prod_Size_Id,1,1) aa  from OVDBA.V_PUBLIC_INVENTORY order by aa,  J_Height
+             ;
+END;
+
+--2--
+
+
+CREATE OR REPLACE PROCEDURE SPDEV_INVList_ProdLength(cursor_ OUT SYS_REFCURSOR)
+AS
+
+BEGIN
+
+OPEN cursor_ FOR    
+
+ Select  ' All' as LENGTH_IN_FEET,1 as f_length, 0 as ACTIVE from dual union       
+   SELECT TO_CHAR(FLOOR(F_LENGTH/ 12)) || ' ft ' || TO_CHAR(Mod ( F_LENGTH , 12)) || ' in' as "LENGTH_IN_FEET", f_length , ACTIVE 
+   FROM ( SELECT INV.F_LENGTH, SUM(INV.IN_STOCK) AS ACTIVE FROM LEVEL3.PUBLIC_INVENTORY INV GROUP BY INV.F_LENGTH ) ORDER BY F_LENGTH
+;
+END;
+
+--3--
+
+
+CREATE OR REPLACE PROCEDURE SPDEV_INVList_ProdGrade(cursor_ OUT SYS_REFCURSOR)
+AS
+
+BEGIN
+
+OPEN cursor_ FOR    
+  Select ' All' as C_EXT_GRD_ID from dual union 
+  Select distinct C_EXT_GRD_ID FROM OVDBA.V_PUBLIC_INVENTORY V_PUBLIC_INVENTORY order by C_EXT_GRD_ID asc
+             ;
+END;
+
+--4--
+
+CREATE OR REPLACE PROCEDURE SPDEV_INVList_ProdSize_Inclass(param_ IN varchar,cursor_ OUT SYS_REFCURSOR)
+AS
+
+BEGIN
+
+OPEN cursor_ FOR    
+   Select ' All' as c_Prod_Size_Id, '1' as C_Prod_Class_Id, 1 as  J_Height, '1' as aa from dual  union 
+   select distinct c_Prod_Size_Id,C_Prod_Class_Id,J_Height, substr(c_Prod_Size_Id,1,1) aa  from OVDBA.V_PUBLIC_INVENTORY
+    where C_Prod_Class_Id = param_
+    order by aa,  J_Height
+             ;
+END;
+
+--5--
+
+CREATE OR REPLACE PROCEDURE SPDEV_INVList_ProdLen_Inclass(param_ IN varchar,cursor_ OUT SYS_REFCURSOR)
+AS
+
+BEGIN
+
+OPEN cursor_ FOR    
+  Select  ' All' as LENGTH_IN_FEET,1 as f_length from dual union 
+  Select distinct LENGTH_IN_FEET,f_length 
+  FROM OVDBA.V_PUBLIC_INVENTORY 
+  where C_PROD_CLASS_ID = param_  
+  order by f_length asc
+             ;
+END;
+
+--6--
+
+CREATE OR REPLACE PROCEDURE SPDEV_INVList_ProdGrade_Incls(param_ IN varchar,cursor_ OUT SYS_REFCURSOR)
+AS
+
+BEGIN
+
+OPEN cursor_ FOR    
+ Select ' All' as C_EXT_GRD_ID from dual union 
+ Select distinct C_EXT_GRD_ID 
+ FROM OVDBA.V_PUBLIC_INVENTORY V_PUBLIC_INVENTORY 
+ where C_PROD_CLASS_ID = param_
+ order by C_EXT_GRD_ID asc
+             ;
+END;
+
+--7--
+CREATE OR REPLACE PROCEDURE SPDEV_InventoryList_SEARCH(ClassId_ IN varchar, Prod_Size_ IN varchar,Length_ IN varchar , Grade_ IN varchar , cursor_ OUT SYS_REFCURSOR)
+AS
+
+BEGIN
+              
+    OPEN cursor_ FOR
+        SELECT ROWNUM, LENGTH_IN_FEET, F_LENGTH AS F_LENGTH,J_TOT_BUNDLES_UNSOLD,TOTAL_SECTIONS_UNSOLD,J_TOT_TONS_UNSOLD ,C_PROD_SIZE_ID, 
+        C_EXT_GRD_ID, J_SECTIONS_IN_BUNDLE,F_SECTION_WEIGHT,F_BUNDLE_WEIGHT,C_PROD_CLASS_ID,J_HEIGHT,F_LBS_PER_FT,  
+        TODAY AS TODAY, Q_NEXT_ROLL_DATE AS Q_NEXT_ROLL_DATE,PRICE AS PRICE  
+        FROM OVDBA.V_PUBLIC_INVENTORY V_PUBLIC_INVENTORY   Where rownum is not null 
+                 and C_PROD_CLASS_ID like ClassId_ || '%' 
+                  and C_PROD_SIZE_ID like Prod_Size_ || '%' 
+                   and LENGTH_IN_FEET like Length_ || '%' 
+                    and C_EXT_GRD_ID like Grade_ || '%' 
+            ;                                       
+    
+END;
+
+
+--8--
+

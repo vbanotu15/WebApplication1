@@ -1,0 +1,154 @@
+﻿
+  .sidebar
+
+{
+    width: 20.390070921985815%; /*230px ÷ 1128px*/
+    float: left;
+    background-color: #f7f7f7;
+    -webkit-box-shadow: -10px 10px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: -10px 10px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 8px;
+    padding-bottom: 15px;
+}
+
+.sidebar h5 {
+    display: none;
+    text-indent: -5000px;
+}
+
+.sideNav ul {
+    margin-bottom: 25px;
+}
+
+    .sideNav ul li a:link, .sideNav ul li a:visited, .sideNav ul li a:active {
+        display: block;
+        font-size: 14px; /*14px ÷ 16px*/
+        line-height: 18px; /*18px ÷ 14px*/
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 400;
+        color: #313131; /*Dark Grey*/
+        text-decoration: none;
+        padding-top: 12px;
+        padding-bottom: 12px;
+        padding-left: 19.56521739130435%; /*45px ÷ 230px*/
+        padding-right: 2.1739130434782608%; /*5px ÷ 230px*/
+        border-bottom: 1px solid #d0cfcf;
+        background-image: url(../images/tier2/arrow-grey.png);
+        background-repeat: no-repeat;
+        background-position: 20px 15px;
+    }
+
+    .sideNav ul li a:hover {
+        color: #c02e39; /*red*/
+    }
+
+    .sideNav ul li a.current {
+        color: #FFFFFF; /*Dark Grey*/
+        background-image: url(../images/tier2/arrow-white.png);
+        background-color: #c02e39; /*red*/
+        cursor: default;
+    }
+
+Items li p {
+    line-height: 22px;
+}
+
+.Items li p.sub {
+    font-size: 18px; /*18px ÷ 16px*/
+    padding-bottom: 15px;
+    padding-top: 0px;
+    line-height: 20px;
+}
+
+.Items li img.square {
+    width: 19.230769230769232%; /*130px ÷ 676px*/
+    height: auto;
+    border: #C7C7C7;
+    border: 3px solid #CECECE;
+    display: block;
+    float: left;
+    margin-right: 1.282051282051282%; /*10px ÷ 780px*/
+}
+
+.Items li img.wide {
+    display: none;
+}
+
+.Items .copy {
+    width: 72.8448275862069%; /*507px ÷ 696px*/
+    float: left;
+}
+
+.Items li a:link, .Items li a:visited, .Items li a:active {
+    width: 145px;
+    color: #FFFFFF;
+    font-size: 16px; /*16px ÷ 16px*/
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-style: italic;
+    text-decoration: none;
+    display: block;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 25px;
+    background-color: #c02e39; /*red*/
+    border-radius: 10px;
+    background-image: url(../images/tier2/small-red-arrow.png);
+    background-repeat: no-repeat;
+    background-position: 0px 1px;
+}
+
+.Items li a:hover, .Items li a:focus {
+    background-color: #B1B1B2;
+}
+
+.col2 {
+    width: 60%; /*300px ÷ 850px*/
+    float: none;
+    clear: both;
+}
+
+.catalog a:link, .catalog a:visited, .catalog a:active {
+    display: block;
+    font-size: 16px; /*16px ÷ 16px*/
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    color: #FFFFFF; /*Dark Grey*/
+    background-color: #505050; /*Dark Grey*/
+    text-decoration: none;
+    padding-top: 12px;
+    padding-bottom: 11px;
+    padding-left: 23.91304347826087%; /*55px ÷ 230px*/
+    padding-right: 2.1739130434782608%; /*5px ÷ 230px*/
+    border-bottom: 1px solid #d0cfcf;
+    background-image: url(../images/tier2/download-arrow.gif);
+    background-repeat: no-repeat;
+    background-position: left top;
+}
+
+.catalog a:hover {
+    color: #979797;
+}
+
+.catalog a.current {
+    color: #979797;
+}
+
+.mainheader.company {
+    background-image: url(../images/headers/company-header.jpg);
+}
+
+#breadcrumbs ul li a:link, #breadcrumbs ul li a:active, #breadcrumbs ul li a:visited {
+    display: block;
+    color: #313131;
+    text-decoration: none;
+    background-image: url(../images/tier2/small-red-arrow.png);
+    background-repeat: no-repeat;
+    background-position: 0px 1px;
+    padding-left: 25px;
+}
+
+
+
+
+

@@ -34,7 +34,7 @@
 
                     <div class="topnav">
                         <ul>
-                            <li><a href="mysdi/mysdi-login.php">MySDI Login</a></li>
+                            <li><a href="mysdi/mysdi-login.aspx">MySDI Login</a></li>
                         </ul>
                     </div>
 
@@ -101,7 +101,7 @@
                         <li>
                             <h3 class="smaller">Quick Links:</h3>
                         </li>
-                        <li><a href="resources/price-list.php">Price List</a></li>
+                        <li><a href="resources/price-list.aspx">Price List</a></li>
                         <li><a href="resources/inventory-list.php">Inventory List</a></li>
                         <li><a href="resources/rolling-schedule.php">Rolling Schedule</a></li>
                         <li><a href="resources/bundle-chart.html">Bundle Chart</a></li>

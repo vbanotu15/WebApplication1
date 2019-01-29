@@ -1,0 +1,303 @@
+--1--
+ 
+
+create or replace view VW_CustomerLocation as
+
+SELECT DISTINCT
+        CUSTOMER_NUM,
+        CUSTOMER_NAME,
+        BUSINESS_NAME,
+        ('(' || TRANS_MODE || ') - ' || SHIP_LOCATION) ReceivingLocation,
+        BUSINESS_NAME || ' ' ||  ('(' || TRANS_MODE || ') - ' || RECEIVING_LOCATION || ' - ' ||  SHIP_LOCATION) ReceivingLocation1
+        ,
+         RECEIVING_LOCATION,
+        SHIP_LOCATION,
+          TRANS_MODE,
+        C_ADDR_CODE, 
+       'n' AS C_CHECKED
+FROM
+(
+SELECT      CUSTOMER_NUM,
+            C_CUST_NAME AS CUSTOMER_NAME,
+            BUSINESS_NAME,
+            C_REC_LOCATION AS RECEIVING_LOCATION,
+            C_CITY || ', ' || C_STATE_PROV AS SHIP_LOCATION,
+                TRANS_MODE,
+            C_ADDR_CODE
+FROM
+(
+SELECT    O_HDR.C_CUST_PO_NUM ,
+          O_ITEM.C_SALES_ORD_NUM,
+          O_ITEM.C_TRAN_MODE_ID AS TRANS_MODE,
+          CUST.C_CUST_NAME,
+          ADDR.C_CITY AS C_CITY,
+          ADDR.C_NAME AS BUSINESS_NAME,
+          CUST.C_ADDR_ID,
+          ADDR.C_STATE_PROV AS C_STATE_PROV,
+          ADDR.C_RECEIVING_LOCATION AS C_REC_LOCATION,
+          CUST.C_CUST_NUM AS CUSTOMER_NUM,
+           O_ITEM.C_SHIP_TO_ADDR_CODE AS C_ADDR_CODE
+FROM    OM_CUST CUST
+JOIN    OM_ORD_HDR O_HDR
+ON        CUST.C_CUST_NUM = O_HDR.C_CUST_NUM
+JOIN    OM_ORD_ITEM O_ITEM
+ON        O_HDR.C_SALES_ORD_NUM = O_ITEM.C_SALES_ORD_NUM
+AND        (        O_ITEM.C_REL_STAT NOT IN ('CLS','CNCL')
+            OR    (        O_ITEM.C_REL_STAT IN ('CLS','CNCL')
+                    AND    O_ITEM.Q_CHG_STATUS_DATE >= SYSDATE - 7)
+        )
+JOIN    COR_ADDR ADDR
+ON       ADDR.C_ADDR_ID = CUST.C_CUST_NUM || O_ITEM.C_SHIP_TO_ADDR_CODE
+--WHERE CUST.C_CUST_NUM = 1206
+) QRY_1
+) QRY_2
+WHERE 1 = 1
+order by SHIP_LOCATION
+;
+--2--
+																							  
+
+
+CREATE OR REPLACE PROCEDURE SPDEV_CustomerLocation(param_ IN numeric, cursor_ OUT SYS_REFCURSOR)
+AS
+
+BEGIN
+
+OPEN cursor_ FOR    
+
+SELECT 0 CUSTOMER_NUM, '' CUSTOMER_NAME, '' BUSINESS_NAME , '' ReceivingLocation, 'All' ReceivingLocation1, '' RECEIVING_LOCATION, '' SHIP_LOCATION,'' TRANS_MODE,'0' C_ADDR_CODE, '' C_CHECKED FROM dual
+union
+   select CUSTOMER_NUM,CUSTOMER_NAME,BUSINESS_NAME,ReceivingLocation,ReceivingLocation1,RECEIVING_LOCATION,SHIP_LOCATION,TRANS_MODE,C_ADDR_CODE,C_CHECKED from OVDBA.VW_CustomerLocation where CUSTOMER_NUM = param_
+   ;
+END;
+
+  
+--3--
+
+  CREATE OR REPLACE PROCEDURE SPDEV_CustomerOrderStatus(param_ IN numeric,AddrCode_ IN varchar2, cursor_ OUT SYS_REFCURSOR)
+AS
+
+BEGIN
+
+
+
+if AddrCode_ = '0' then
+
+
+OPEN cursor_ FOR  
+
+SELECT 
+        O_ITEM.C_SALES_ORD_NUM || ' ' || O_ITEM.C_ORD_ITEM_NUM as SDISalesOrder,
+        TO_CHAR(FLOOR(ITEM_SIZE.F_ORD_VALUE/ 12)) || ' ft ' || TO_CHAR(Mod ( ITEM_SIZE.F_ORD_VALUE , 12)) || ' in' as "length_in_feet",
+        O_HDR.C_CUST_PO_NUM,
+        CUST.C_CUST_NUM,
+        O_ITEM.C_SALES_ORD_NUM,
+        O_ITEM.C_ORD_ITEM_NUM,
+        O_ITEM.C_PROD_CLASS_ID,
+        O_ITEM.C_PROD_SIZE_ID,
+        O_ITEM.C_EXT_GRD_ID,
+        O_ITEM.F_ORD_ITEM_WT,
+         O_ITEM.F_SHIP_WT,
+        CUST.C_CUST_NAME,
+        ITEM_SIZE.F_ORD_VALUE ,
+        O_ITEM.C_TRAN_MODE_ID AS CARRIER_MODE,
+        SHIP_TO.C_CITY AS C_CITY,
+        SHIP_TO.C_NAME AS BUSINESS_NAME,
+        CUST.C_ADDR_ID,
+        SHIP_TO.C_STATE_PROV,
+        O_ITEM.Q_PROD_DATE,
+        O_ITEM.C_REL_STAT,
+        O_ITEM.J_NUM_PCE ,
+        O_ITEM.Q_PRM_DLVR_DATE ,
+        O_ITEM.F_RETURN_WT,
+        CUST.C_TERRITORY_ID ,
+        O_ITEM.F_RTS_WT,
+        O_ITEM.F_SHIP_WT,
+        O_ITEM.F_ASGN_FG_WT,
+		  O_ITEM.C_PROD_SRC,
+        CUST_ADDR.C_CUST_ADDR_CODE,
+        BUILT_LOADS.PLANNED_WT,
+        CASE BUILT_LOADS.LOAD_STATUS WHEN 'ON_HOLD' THEN 'LOADING' WHEN 'PLANNED' THEN 'INFO' WHEN 'IN_PLAN' THEN 'INFO' ELSE BUILT_LOADS.LOAD_STATUS END LOAD_STATUS,
+        SHIP_TO.C_RECEIVING_LOCATION AS C_REC_LOCATION,
+         (  SELECT MAX(Q_EXP_CARR_ARVL)
+            FROM 
+            SL_VW_PICKUPS PK
+            WHERE C_CUST_NUM = param_
+             AND PK.C_SALES_ORD_NUM = O_ITEM.C_SALES_ORD_NUM 
+             AND PK.C_ORD_ITEM_NUM = O_ITEM.C_ORD_ITEM_NUM)  AS PICKUP_ID,
+         ( SELECT COUNT ( SL_HOLDS.HOLD_CODE )
+             FROM OM_ORD_ITEM_HOLDS SL_HOLDS
+            WHERE O_ITEM.C_SALES_ORD_NUM = SL_HOLDS.C_SALES_ORD_NUM
+              AND      O_ITEM.C_ORD_ITEM_NUM = SL_HOLDS.C_ORD_ITEM_NUM
+              AND      SL_HOLDS.HOLD_CODE = 'SALES')  AS SL_HOLDS_CNT,
+         ( SELECT COUNT ( CR_HOLDS.HOLD_CODE )
+             FROM OM_ORD_ITEM_HOLDS CR_HOLDS
+            WHERE O_ITEM.C_SALES_ORD_NUM = CR_HOLDS.C_SALES_ORD_NUM
+              AND      O_ITEM.C_ORD_ITEM_NUM = CR_HOLDS.C_ORD_ITEM_NUM
+              AND      CR_HOLDS.HOLD_CODE = 'CREDIT')  AS CR_HOLDS_CNT
+FROM    OM_CUST CUST
+JOIN    OM_ORD_HDR O_HDR
+ON        CUST.C_CUST_NUM = O_HDR.C_CUST_NUM
+JOIN    OM_ORD_ITEM O_ITEM
+ON        O_HDR.C_SALES_ORD_NUM = O_ITEM.C_SALES_ORD_NUM
+AND        (        O_ITEM.C_REL_STAT IN ('REL','INCM')
+            OR    (        O_ITEM.C_REL_STAT IN ('CLS','CNCL')
+                    AND    O_ITEM.Q_CHG_STATUS_DATE >= SYSDATE - 7)
+        )
+JOIN    OM_CUST_ADDR CUST_ADDR
+ON        CUST.C_CUST_NUM = CUST_ADDR.C_CUST_NUM
+AND        CUST_ADDR.C_CUST_ADDR_CODE = O_ITEM.C_SHIP_TO_ADDR_CODE
+JOIN    OM_ORD_ITEM_DIM ITEM_SIZE
+ON        O_ITEM.C_SALES_ORD_NUM = ITEM_SIZE.C_SALES_ORD_NUM
+AND        O_ITEM.C_ORD_ITEM_NUM = ITEM_SIZE.C_ORD_ITEM_NUM
+AND        ITEM_SIZE.C_DIM_ID = 'LENGTH'
+JOIN COR_ADDR SHIP_TO ON SHIP_TO.C_ADDR_ID = CUST_ADDR.C_ADDR_ID
+LEFT JOIN
+                  (  SELECT REL.C_SALES_ORD_NUM AS LOAD_ORDER,
+                            REL.C_ORD_ITEM_NUM AS LOAD_ITEM,
+									 NVL(SUM(SL.F_LOAD_WT),0) /2000 PLANNED_WT,	 
+                            MAX (
+                               C_LOAD_STAT)
+                            KEEP (DENSE_RANK FIRST
+                                  ORDER BY
+                                     DECODE (C_LOAD_STAT,
+                                             'IN_PLAN', 1,
+                                             'PLANNED', 2,
+                                             'LOADING', 3,
+                                             'ON_HOLD', 4,
+                                             'LOADED', 5))
+                               AS LOAD_STATUS
+                       FROM SL_LOAD SL
+                            INNER JOIN SL_ORD_REL_LOAD_INT REL
+                               ON SL.C_LOAD_ID = REL.C_LOAD_ID
+							  WHERE SL.C_LOAD_STAT <> 'SHIPPED'
+                   GROUP BY REL.C_SALES_ORD_NUM, REL.C_ORD_ITEM_NUM)
+                  BUILT_LOADS
+                     ON     BUILT_LOADS.LOAD_ORDER = O_ITEM.C_SALES_ORD_NUM
+                        AND BUILT_LOADS.LOAD_ITEM = O_ITEM.C_ORD_ITEM_NUM
+--WHERE    CUST.C_CUST_NUM = CASE WHEN :as_cust_num IS NULL OR :as_cust_num =''  THEN CUST.C_CUST_NUM    ELSE :as_cust_num   END
+WHERE CUST.C_CUST_NUM =param_  
+AND 1=1
+order by O_HDR.C_CUST_PO_NUM, SDISalesOrder, C_Prod_Size_Id
+; 
+
+
+
+else
+
+
+OPEN cursor_ FOR  
+
+SELECT 
+        O_ITEM.C_SALES_ORD_NUM || ' ' || O_ITEM.C_ORD_ITEM_NUM as SDISalesOrder,
+        TO_CHAR(FLOOR(ITEM_SIZE.F_ORD_VALUE/ 12)) || ' ft ' || TO_CHAR(Mod ( ITEM_SIZE.F_ORD_VALUE , 12)) || ' in' as "length_in_feet",
+        O_HDR.C_CUST_PO_NUM,
+        CUST.C_CUST_NUM,
+        O_ITEM.C_SALES_ORD_NUM,
+        O_ITEM.C_ORD_ITEM_NUM,
+        O_ITEM.C_PROD_CLASS_ID,
+        O_ITEM.C_PROD_SIZE_ID,
+        O_ITEM.C_EXT_GRD_ID,
+        O_ITEM.F_ORD_ITEM_WT,
+         O_ITEM.F_SHIP_WT,
+        CUST.C_CUST_NAME,
+        ITEM_SIZE.F_ORD_VALUE ,
+        O_ITEM.C_TRAN_MODE_ID AS CARRIER_MODE,
+        SHIP_TO.C_CITY AS C_CITY,
+        SHIP_TO.C_NAME AS BUSINESS_NAME,
+        CUST.C_ADDR_ID,
+        SHIP_TO.C_STATE_PROV,
+        O_ITEM.Q_PROD_DATE,
+        O_ITEM.C_REL_STAT,
+        O_ITEM.J_NUM_PCE ,
+        O_ITEM.Q_PRM_DLVR_DATE ,
+        O_ITEM.F_RETURN_WT,
+        CUST.C_TERRITORY_ID ,
+        O_ITEM.F_RTS_WT,
+        O_ITEM.F_SHIP_WT,
+        O_ITEM.F_ASGN_FG_WT,
+		  O_ITEM.C_PROD_SRC,
+        CUST_ADDR.C_CUST_ADDR_CODE,
+        BUILT_LOADS.PLANNED_WT,
+        CASE BUILT_LOADS.LOAD_STATUS WHEN 'ON_HOLD' THEN 'LOADING' WHEN 'PLANNED' THEN 'INFO' WHEN 'IN_PLAN' THEN 'INFO' ELSE BUILT_LOADS.LOAD_STATUS END LOAD_STATUS,
+        SHIP_TO.C_RECEIVING_LOCATION AS C_REC_LOCATION,
+         (  SELECT MAX(Q_EXP_CARR_ARVL)
+            FROM 
+            SL_VW_PICKUPS PK
+            WHERE C_CUST_NUM = param_
+             AND PK.C_SALES_ORD_NUM = O_ITEM.C_SALES_ORD_NUM 
+             AND PK.C_ORD_ITEM_NUM = O_ITEM.C_ORD_ITEM_NUM)  AS PICKUP_ID,
+         ( SELECT COUNT ( SL_HOLDS.HOLD_CODE )
+             FROM OM_ORD_ITEM_HOLDS SL_HOLDS
+            WHERE O_ITEM.C_SALES_ORD_NUM = SL_HOLDS.C_SALES_ORD_NUM
+              AND      O_ITEM.C_ORD_ITEM_NUM = SL_HOLDS.C_ORD_ITEM_NUM
+              AND      SL_HOLDS.HOLD_CODE = 'SALES')  AS SL_HOLDS_CNT,
+         ( SELECT COUNT ( CR_HOLDS.HOLD_CODE )
+             FROM OM_ORD_ITEM_HOLDS CR_HOLDS
+            WHERE O_ITEM.C_SALES_ORD_NUM = CR_HOLDS.C_SALES_ORD_NUM
+              AND      O_ITEM.C_ORD_ITEM_NUM = CR_HOLDS.C_ORD_ITEM_NUM
+              AND      CR_HOLDS.HOLD_CODE = 'CREDIT')  AS CR_HOLDS_CNT
+FROM    OM_CUST CUST
+JOIN    OM_ORD_HDR O_HDR
+ON        CUST.C_CUST_NUM = O_HDR.C_CUST_NUM
+JOIN    OM_ORD_ITEM O_ITEM
+ON        O_HDR.C_SALES_ORD_NUM = O_ITEM.C_SALES_ORD_NUM
+AND        (        O_ITEM.C_REL_STAT IN ('REL','INCM')
+            OR    (        O_ITEM.C_REL_STAT IN ('CLS','CNCL')
+                    AND    O_ITEM.Q_CHG_STATUS_DATE >= SYSDATE - 7)
+        )
+JOIN    OM_CUST_ADDR CUST_ADDR
+ON        CUST.C_CUST_NUM = CUST_ADDR.C_CUST_NUM
+AND        CUST_ADDR.C_CUST_ADDR_CODE = O_ITEM.C_SHIP_TO_ADDR_CODE
+JOIN    OM_ORD_ITEM_DIM ITEM_SIZE
+ON        O_ITEM.C_SALES_ORD_NUM = ITEM_SIZE.C_SALES_ORD_NUM
+AND        O_ITEM.C_ORD_ITEM_NUM = ITEM_SIZE.C_ORD_ITEM_NUM
+AND        ITEM_SIZE.C_DIM_ID = 'LENGTH'
+JOIN COR_ADDR SHIP_TO ON SHIP_TO.C_ADDR_ID = CUST_ADDR.C_ADDR_ID
+LEFT JOIN
+                  (  SELECT REL.C_SALES_ORD_NUM AS LOAD_ORDER,
+                            REL.C_ORD_ITEM_NUM AS LOAD_ITEM,
+									 NVL(SUM(SL.F_LOAD_WT),0) /2000 PLANNED_WT,	 
+                            MAX (
+                               C_LOAD_STAT)
+                            KEEP (DENSE_RANK FIRST
+                                  ORDER BY
+                                     DECODE (C_LOAD_STAT,
+                                             'IN_PLAN', 1,
+                                             'PLANNED', 2,
+                                             'LOADING', 3,
+                                             'ON_HOLD', 4,
+                                             'LOADED', 5))
+                               AS LOAD_STATUS
+                       FROM SL_LOAD SL
+                            INNER JOIN SL_ORD_REL_LOAD_INT REL
+                               ON SL.C_LOAD_ID = REL.C_LOAD_ID
+							  WHERE SL.C_LOAD_STAT <> 'SHIPPED'
+                   GROUP BY REL.C_SALES_ORD_NUM, REL.C_ORD_ITEM_NUM)
+                  BUILT_LOADS
+                     ON     BUILT_LOADS.LOAD_ORDER = O_ITEM.C_SALES_ORD_NUM
+                        AND BUILT_LOADS.LOAD_ITEM = O_ITEM.C_ORD_ITEM_NUM
+--WHERE    CUST.C_CUST_NUM = CASE WHEN :as_cust_num IS NULL OR :as_cust_num =''  THEN CUST.C_CUST_NUM    ELSE :as_cust_num   END
+WHERE CUST.C_CUST_NUM =param_   and CUST_ADDR.C_CUST_ADDR_CODE = AddrCode_ 
+AND 1=1
+order by O_HDR.C_CUST_PO_NUM, SDISalesOrder, C_Prod_Size_Id
+; 
+
+
+
+end if;
+
+
+
+
+
+
+
+
+END;
+
+
+
+--4--
+
+

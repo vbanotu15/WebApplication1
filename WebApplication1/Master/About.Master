@@ -1,110 +1,227 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="About.Master.cs" Inherits="WebApplication1.AboutMaster" %>
 
 <!DOCTYPE html>
-
-<html lang="en">
+<html id="test" lang="en">
 <head runat="server">
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %> SDI - Structural and Rail Division</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Structural Steel – Beams and Channel Supply – Steel Dynamics</title>
+    <link rel="canonical" href="https://www.sdi-structural.com/index.html">
+    <link href="../Style/css/main-sdi-structural.css" rel="stylesheet" type="text/css">
+    <link href="../Style/CSS/tier2-sdi-structural.css" rel="stylesheet" />
 
-    <asp:PlaceHolder runat="server">
-        <%: Scripts.Render("~/bundles/modernizr") %>
-    </asp:PlaceHolder>
+    <link href="../Style/css/nivo-slider-sdi.css" rel="stylesheet" type="text/css">
 
-    <webopt:BundleReference runat="server" Path="~/Content/css" />
-    <link href="../favicon.ico" rel="shortcut icon" type="image/x-icon" />
-    <link href="../Style/style2.css" rel="stylesheet" />
+    <link href="//fonts.googleapis.com/css?family=Montserrat:400,700|Lora:400,400italic,700,700italic|Muli:400,300italic,300" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+    <script src="../js/modernizr-custom.js"></script>
+    <link rel="shortcut icon" href="https://www.sdi-structural.com/favicon.ico">
+    <!--Modernizer-->
+    <script>
+        if (!Modernizr.svg) var i = document.getElementsByTagName("img"), j, y; for (j = i.length; j--;)y = i[j].src, y.match(/svg$/) && (i[j].src = y.slice(0, -3) + "png")</script>
+    <!--EndModernizer-->
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 
+    <!--NivoSlider-->
+    <script type="text/javascript" src="js/jquery-1.9.0.min.js"></script>
+    <script type="text/javascript" src="js/jquery.nivo.slider.min.js"></script>
 
+    <!--Mobile Navigation-->
+    <script>
+        $(document).ready(function () {
 
-   </head>
-<body>
-    <form runat="server">
+            $('#menu-toggle').click(function () {
+                $('#menu').toggleClass('open');
+                e.preventDefault();
+            });
+
+        });
+    </script>
+
+    <!--Slideshow Script-->
+    <script type="text/javascript">
+        $(window).load(function () {
+            $('.slider').nivoSlider({
+                effect: 'fade', // Specify sets like: 'fold,fade,sliceDown'
+                directionNav: false,// Next & Prev navigation
+                controlNav: false, // 1,2,3... navigation
+                pauseOnHover: false, // Stop animation while hovering
+                slices: 15, // For slice animations
+                animSpeed: 500, // Slide transition speed
+                pauseTime: 5000, // How long each slide will show
+            });
+        });
+    </script>
+    <!--End Slideshow Script-->
+  <style>
+      body {
+          background-image: url(../images/body.jpg);
+      }|
        
-        <asp:ScriptManager runat="server">
-            <Scripts>
-                <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
-                <%--Framework Scripts--%>
-                <asp:ScriptReference Name="MsAjaxBundle" />
-                <asp:ScriptReference Name="jquery" />
-                <asp:ScriptReference Name="bootstrap" />
-                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
-                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
-                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
-                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
-                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
-                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
-                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
-                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
-                <asp:ScriptReference Name="WebFormsBundle" />
-                <%--Site Scripts--%>
-            </Scripts>
-        </asp:ScriptManager>
+        .sideNav ul li a:link, .sideNav ul li a:visited, .sideNav ul li a:active {
+            background-image: url(../images/tier2/arrow-grey.png);
+            background-repeat: no-repeat;
+            display: block;
+            font-size: 14px; /*14px ÷ 16px*/
+            line-height: 18px; /*18px ÷ 14px*/
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            /*color: #313131; Dark Grey*/
+            text-decoration: none;
+            padding-top: 12px;
+            padding-bottom: 12px;
+            padding-left: 19.56521739130435%; /*45px ÷ 230px*/
+            padding-right: 2.1739130434782608%; /*5px ÷ 230px*/
+            border-bottom: 1px solid #d0cfcf;
+            background-position: 20px 15px;
+        }
 
+      .catalog a:link, .catalog a:visited, .catalog a:active {
+          display: block;
+          font-size: 16px; /*16px ÷ 16px*/
+          font-family: 'Montserrat', sans-serif;
+          font-weight: 400;
+          /* color: #FFFFFF; Dark Grey*/
+          background-color: #505050; /*Dark Grey*/
+          text-decoration: none;
+          padding-top: 12px;
+          padding-bottom: 11px;
+          padding-left: 23.91304347826087%; /*55px ÷ 230px*/
+          padding-right: 2.1739130434782608%; /*5px ÷ 230px*/
+          border-bottom: 1px solid #d0cfcf;
+          background-image: url(../images/tier2/download-arrow.gif);
+          background-repeat: no-repeat;
+          background-position: left top;
+      }
 
-        <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
+  </style>
 
-                    <div class="logowrapper">
-                        <div class="logocontainer">
-                            <div class="logo" title="Steel Dynamics Structural and Rail Division">
-                                <a href="/Default.aspx">
-                                    <img src="../Images/home/steel-dynamics-rail-division-logo.svg" alt="Steel Dynamics Structural and Rail Division" /></a>
-                            </div>
+<body>
+    <form id="form1" runat="server">
+        <h1>Steel Dynamics Structural Rail Division</h1>
+        <div id="wrapper">
+            <!-- the header and navigation -->
+            <header>
+                <div class="logowrapper">
+                    <div class="logocontainer">
+                        <div class="logo" title="Steel Dynamics Structural and Rail Division">
+                            <a href="../default.aspx">
+                                <img src="../Images/home/steel-dynamics-rail-division-logo.svg" alt="Steel Dynamics Structural and Rail Division" /></a>
                         </div>
-
-                      
-
-                        <div class="clear"></div>
                     </div>
 
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <%-- <a class="navbar-brand" runat="server" href="~/">Application name</a>--%>
+                    <div class="topnav">
+                        <ul>
+                            <li><a href="../Security/Login.aspx">MySDI Login</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="clear"></div>
                 </div>
 
-                <br />
-                <br />
-                <br />
-                <br />
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a runat="server" href="~/">Home</a></li>
-                        <li><a runat="server" href="~/About/company-overview.aspx">About</a></li>
-                        <li><a runat="server" href="~/About/company-overview.aspx">Structural Products</a></li>
-                        <li><a runat="server" href="~/About/company-overview.aspx">Resources</a></li>
-                        <li><a runat="server" href="~/About/company-overview.aspx">Contact</a></li>
+                <nav class="nav">
+                    <h2>Main Navigation</h2>
+                    <a id="menu-toggle" class="anchor-link" href="#">Menu</a>
+                    <ul class="simple-toggle" id="menu">
+                        <li><a href="../Default.aspx">Home</a></li>
+                        <li><a href="../about/company-overview.aspx">About</a></li>
+                        <li><a href="../structural-products/products-overview.aspx">Structural Products</a></li>
+                        <li><a href="../resources/resources-overview.aspx">Resources</a></li>
+                        <li><a href="../contact/structural-contact-us.aspx">Contact</a></li>
+                        <li><a href="../contact/structural-request-quote.aspx">Request Quote</a></li>
                     </ul>
+                </nav>
+            </header>
+             <div class="clear"></div>
 
-                     <div  style="float:right;top:10px;text-align:right">
-                            <ul>
-                                <li><a runat="server" href="../Security/Login.aspx" style="font-size:12px">MySDI Login</a></li>
-                            </ul>
-                        </div>
-                </div>
+            <h1>Steel Dynamics Structural Rail Division</h1>
+            <div class="mainheader company clear">
+                <h3 title="About">About</h3>
             </div>
-        </div>
-        <div class="container body-content">
-            <asp:ContentPlaceHolder ID="MainContent" runat="server">
-               
 
-            </asp:ContentPlaceHolder>
-            <hr />
+            <div class="content">
+                <div class="RightColumn">
+                    <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                    </asp:ContentPlaceHolder>
+                    <div class="top"><a href="#top">TOP</a></div>
+                </div>
+                <aside class="sidebar">
+                    <h5>Side Navigation</h5>
+                    <div class="sideNav" style="background-image: url('../Images/tier2/arrow-grey.png'); background-repeat: no-repeat">
+                        <ul>
+                            <li><a href="../About/company-overview.aspx" title="About" class="current">About</a></li>
+                            <li><a href="capabilities.aspx" title="Capabilities" class="">Capabilities</a></li>
+                            <li><a href="management.aspx" title="Leadership" class="">Our Management</a></li>
+                            <li><a href="culture.aspx" title="Culture" class="">Culture</a></li>
+                            <li><a href="safety.aspx" title="Safety" class="">Safety</a></li>
+                            <li><a href="environment.aspx" title="Environment" class="">Environment</a></li>
+                            <li><a href="community.aspx" title="Community" class="">Community</a></li>
+                            <li><a href="structural-products-video.aspx" title="Video" class="">Video</a></li>
+                            <li><a href="news-and-events.aspx" title="News & Events" class="">News &amp; Events</a></li>
+                            <li><a href="web-policy.aspx" title="Web Policy" class="">Web Policy</a></li>
+                        </ul>
+                    </div>
+                    <div class="catalog">
+                        <a href="../resources/structural-product-guides.aspx" title="Product Guides">Product Guides</a>
+                    </div>
+                    <div class="extras">
+                        <ul>
+                            Quick Links:
+                            <li><a href="../resources/price-list.aspx">Price List</a></li>
+                            <li><a href="../resources/inventory-list.aspx">Inventory List</a></li>
+                            <li><a href="../resources/rolling-schedule.aspx">Rolling Schedule</a></li>
+                            <li><a href="../resources/bundle-chart.aspx">Bundle Chart</a></li>
+                            <li><a href="../resources/freight-rate.aspx">Get Freight Rate</a></li>
+                        </ul>
+                    </div>
+                </aside>
+                <div class="clear"></div>
+
+            </div>
+            <!-- the footer -->
             <footer>
+                <ul>
+                    <li><a href="../index.aspx">Home</a></li>
+                    <li><a href="../About/company-overview.aspx">About</a></li>
+                    <li><a href="../structural-products/products-overview.aspx">Structural Products</a></li>
+                    <li><a href="../resources/resources-overview.aspx">Resources</a></li>
+                    <li><a href="../contact/structural-contact-us.aspx">Contact</a></li>
+                    <li><a href="../contact/structural-request-quote.aspx">Request Quote</a></li>
+                </ul>
+                <div class="LeftColumn">
+                    <ul>
+                        <li><a href="about/web-policy.aspx">Web Policy/Fwd Look</a></li>
+                        <li><a href="sitemap.aspx">Site Map</a></li>
+                    </ul>
+                </div>
+
                 <div class="RightColumn">
                     <a href="http://www.steeldynamics.com/" target="_blank">
-                        <img src="images/home/sdi-steel-dynamics-logo.png" alt="SDI Steel Dynamics, Inc" title="SDI Steel Dynamics, Inc" /></a>
-
-                    <p>&copy; <%: DateTime.Now.Year %> - SRD ASP Developement</p>
+                        <img src="../Images/home/sdi-steel-dynamics-logo.png" alt="SDI Steel Dynamics, Inc" title="SDI Steel Dynamics, Inc" /></a>
                 </div>
-            </footer>
-        </div>
+                <div class="clear"></div>
 
+                <div class="LeftColumn">
+                    <p>
+                        <script type="text/javascript">
+                            copyright = new Date();
+                            update = copyright.getFullYear();
+                            document.write("© " + update);
+                        </script>
+                        Steel Dynamics, Inc.    &nbsp;&nbsp;All rights reserved.
+                    </p>
+                </div>
+
+
+                <div class="clear"></div>
+            </footer>
+            <div class="spacer25 clear"></div>
+        </div>
     </form>
 </body>
+
+
 </html>

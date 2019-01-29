@@ -2,15 +2,12 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <link href="../Style/CSS/tier2-sdi-structural.css" rel="stylesheet" />
-    <!--Modernizer-->
     <script>
         if (!Modernizr.svg) var i = document.getElementsByTagName("img"), j, y; for (j = i.length; j--;)y = i[j].src, y.match(/svg$/) && (i[j].src = y.slice(0, -3) + "png")</script>
-    <!--EndModernizer-->
 
     <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
     <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 
-    <!--Mobile Navigation-->
     <script>
         $(document).ready(function () {
 
@@ -23,111 +20,30 @@
     </script>
 
     <style>
-        .sidebar {
-            width: 20.390070921985815%; /*230px ÷ 1128px*/
-            float: left;
-            background-color: #f7f7f7;
-            -webkit-box-shadow: -10px 10px 10px rgba(0, 0, 0, 0.1);
-            box-shadow: -10px 10px 10px rgba(0, 0, 0, 0.1);
-            margin-top: 8px;
-            padding-bottom: 15px;
+        .mainheader.company {
+            background-image: url(../images/headers/company-header.jpg);
         }
 
-            .sidebar h5 {
-                display: none;
-                text-indent: -5000px;
-            }
-
-        .sideNav ul {
-            margin-bottom: 25px;
+        body {
+            background-image: url(../images/body.jpg);
         }
 
-            .sideNav ul li a:link, .sideNav ul li a:visited, .sideNav ul li a:active {
-                display: block;
-                font-size: 14px; /*14px ÷ 16px*/
-                line-height: 18px; /*18px ÷ 14px*/
-                font-family: 'Montserrat', sans-serif;
-                font-weight: 400;
-                color: #313131; /*Dark Grey*/
-                text-decoration: none;
-                padding-top: 12px;
-                padding-bottom: 12px;
-                padding-left: 19.56521739130435%; /*45px ÷ 230px*/
-                padding-right: 2.1739130434782608%; /*5px ÷ 230px*/
-                border-bottom: 1px solid #d0cfcf;
-                background-image: url(../images/tier2/arrow-grey.png);
-                background-repeat: no-repeat;
-                background-position: 20px 15px;
-            }
-
-            .sideNav ul li a:hover {
-                color: #c02e39; /*red*/
-            }
-
-            .sideNav ul li a.current {
-                color: #FFFFFF; /*Dark Grey*/
-                background-image: url(../images/tier2/arrow-white.png);
-                background-color: #c02e39; /*red*/
-                cursor: default;
-            }
-
-        Items li p {
-            line-height: 22px;
-        }
-
-        .Items li p.sub {
-            font-size: 18px; /*18px ÷ 16px*/
-            padding-bottom: 15px;
-            padding-top: 0px;
-            line-height: 20px;
-        }
-
-        .Items li img.square {
-            width: 19.230769230769232%; /*130px ÷ 676px*/
-            height: auto;
-            border: #C7C7C7;
-            border: 3px solid #CECECE;
+        .sideNav ul li a:link, .sideNav ul li a:visited, .sideNav ul li a:active {
+            background-image: url(../images/tier2/arrow-grey.png);
+            background-repeat: no-repeat;
             display: block;
-            float: left;
-            margin-right: 1.282051282051282%; /*10px ÷ 780px*/
-        }
-
-        .Items li img.wide {
-            display: none;
-        }
-
-        .Items .copy {
-            width: 72.8448275862069%; /*507px ÷ 696px*/
-            float: left;
-        }
-
-        .Items li a:link, .Items li a:visited, .Items li a:active {
-            width: 145px;
-            color: #FFFFFF;
-            font-size: 16px; /*16px ÷ 16px*/
+            font-size: 14px; /*14px ÷ 16px*/
+            line-height: 18px; /*18px ÷ 14px*/
             font-family: 'Montserrat', sans-serif;
             font-weight: 400;
-            font-style: italic;
+            /*color: #313131; Dark Grey*/
             text-decoration: none;
-            display: block;
-            padding-top: 15px;
-            padding-bottom: 15px;
-            padding-left: 25px;
-            background-color: #c02e39; /*red*/
-            border-radius: 10px;
-            background-image: url(../images/tier2/white-learn-arrow.png);
-            background-repeat: none;
-            background-position: 5px 15px;
-        }
-
-        .Items li a:hover, .Items li a:focus {
-            background-color: #B1B1B2;
-        }
-
-        .col2 {
-            width: 60%; /*300px ÷ 850px*/
-            float: none;
-            clear: both;
+            padding-top: 12px;
+            padding-bottom: 12px;
+            padding-left: 19.56521739130435%; /*45px ÷ 230px*/
+            padding-right: 2.1739130434782608%; /*5px ÷ 230px*/
+            border-bottom: 1px solid #d0cfcf;
+            background-position: 20px 15px;
         }
 
         .catalog a:link, .catalog a:visited, .catalog a:active {
@@ -135,7 +51,7 @@
             font-size: 16px; /*16px ÷ 16px*/
             font-family: 'Montserrat', sans-serif;
             font-weight: 400;
-            color: #FFFFFF; /*Dark Grey*/
+            /* color: #FFFFFF; Dark Grey*/
             background-color: #505050; /*Dark Grey*/
             text-decoration: none;
             padding-top: 12px;
@@ -148,23 +64,46 @@
             background-position: left top;
         }
 
-        .catalog a:hover {
-            color: #979797;
+        .Items li a:link, .Items li a:visited, .Items li a:active {
+            width: 145px;
+            color: #FFFFFF;
+            font-size: 16px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            font-style: italic;
+            text-decoration: none;
+            display: block;
+            padding-top: 15px;
+            padding-bottom: 15px;
+            padding-left: 25px;
+            background-color: #c02e39;
+            border-radius: 10px;
+            background-image: url(../images/tier2/white-learn-arrow.png);
+            background-repeat: none;
+            background-position: 5px 15px;
         }
 
-        .catalog a.current {
-            color: #979797;
+        #breadcrumbs ul li a:link, #breadcrumbs ul li a:active, #breadcrumbs ul li a:visited {
+            display: block;
+            color: #313131;
+            text-decoration: none;
+            background-image: url(../../images/tier2/small-red-arrow.png);
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+            padding-left: 25px;
         }
 
-        .mainheader.company {
-            background-image: url(../images/headers/company-header.jpg);
+        #breadcrumbs ul li a.current {
+            color: #c02e39;
+            cursor: default;
         }
     </style>
+
     <div class="mainheader company clear">
         <h3 title="About">About</h3>
     </div>
 
-    <<div class="clear"></div>
+    <div class="clear"></div>
     <!-- the content -->
     <div class="content">
         <!-- InstanceBeginEditable name="Area1" -->
@@ -177,25 +116,21 @@
             </div>
             <div class="clear"></div>
 
-            <div class="col1 margintop1">
+            <div class="col1 margintop1" style="width: 100%">
                 <h4 title="Capabilities">Capabilities</h4>
                 <img src="../images/eaf-charging-main.jpg" alt="Capabilities" title="Capabilities" class="main" />
-
-                <p>Our operational advantages enable us to meet the most challenging project schedule, while maintaining the highest expectations in quality.</p>
-                <p>Our mill produces a quality product line of structural beams, channels, H-pile, semi-finished blooms, along with standard and premium grade rails.</p>
-
-                <div class="spacer1 clear"></div>
-
+                <p style="width: 100%">Our operational advantages enable us to meet the most challenging project schedule, while maintaining the highest expectations in quality.</p>
+                <p style="width: 100%">Our mill produces a quality product line of structural beams, channels, H-pile, semi-finished blooms, along with standard and premium grade rails.</p>
                 <table class="One B desktop">
                     <tbody>
                         <tr>
                             <td class="grey right left bottom">
                                 <p class="bold">Products</p>
                             </td>
-                            <td class="grey right bottom">
+                            <td class="grey right bottom" style="width: 200px">
                                 <p class="bold">Description</p>
                             </td>
-                            <td class="grey right bottom">
+                            <td class="grey right bottom" style="width: 200px">
                                 <p class="bold">Sizes</p>
                             </td>
                         </tr>
@@ -249,7 +184,6 @@
             <div class="top"><a href="#top">TOP</a></div>
         </div>
         <!-- InstanceEndEditable -->
-
         <!-- the sidebar -->
         <aside class="sidebar">
             <h5>Side Navigation</h5>
@@ -279,11 +213,10 @@
                     <li><a href="../resources/bundle-chart.aspx">Bundle Chart</a></li>
                     <li><a href="../resources/freight-rate.aspx">Get Freight Rate</a></li>
                 </ul>
+                <%--  --%>
             </div>
         </aside>
         <div class="clear"></div>
-
     </div>
     <!-- End content -->
-
 </asp:Content>

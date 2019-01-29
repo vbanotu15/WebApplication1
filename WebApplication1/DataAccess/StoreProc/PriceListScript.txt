@@ -1,0 +1,215 @@
+ 
+ --1--
+ CREATE OR REPLACE PROCEDURE SPDEV_PriceList_Size(cursor_ OUT SYS_REFCURSOR)
+AS
+
+BEGIN
+
+OPEN cursor_ FOR    
+   Select ' All' as BASE_SIZE_DESC,'1' as Prod_form,1 as height from dual union Select distinct BASE_SIZE_DESC,PROD_form, height FROM PUBLIC_PRICE_POINT WHERE PROD_fORM IN('W','HP','S','M') order by PROD_form, height,BASE_SIZE_DESC
+             ;
+END;
+
+
+--2--		
+CREATE OR REPLACE PROCEDURE SPDEV_PriceList_WTFT(cursor_ OUT SYS_REFCURSOR)
+AS
+
+BEGIN
+
+OPEN cursor_ FOR    
+   Select ' All' as WTFT, 1 as  min_density from dual union select distinct (MIN_DENSITY  || ' - ' || MAX_DENSITY) WTFT,min_density from PUBLIC_PRICE_POINT WHERE PROD_fORM IN('W','HP','S','M') order by min_density
+             ;
+END;
+
+
+--3--
+CREATE OR REPLACE PROCEDURE SPDEV_PriceList_PRICE(cursor_ OUT SYS_REFCURSOR)
+AS
+
+BEGIN
+
+OPEN cursor_ FOR    
+   Select ' All' as PRICE from dual union Select distinct '$ ' || CAST(PRICE as varchar2(30)) FROM PUBLIC_PRICE_POINT WHERE PROD_fORM IN('W','HP','S','M') order by PRICE
+             ;
+END;
+
+
+--4--
+
+CREATE OR REPLACE PROCEDURE SPDEV_PriceList_MerchantSize(cursor_ OUT SYS_REFCURSOR)
+AS
+
+BEGIN
+
+OPEN cursor_ FOR    
+   Select ' All' as BASE_SIZE_DESC,'1' as Prod_form,1 as height from dual union (Select distinct BASE_SIZE_DESC,PROD_form, height FROM PUBLIC_PRICE_POINT WHERE PROD_fORM IN('C','MC') ) union select distinct substr(c_prod_size_ID,1,4) BASE_SIZE_DESC, 'Z' as Prod_from,  J_height as height from OVDBA.V_PUBLIC_INVENTORY where c_prod_class_Id='ANGLE' order by PROD_form, height,BASE_SIZE_DESC
+             ;
+END;
+
+
+--5--
+
+CREATE OR REPLACE PROCEDURE SPDEV_PriceList_MerchantWTFT(cursor_ OUT SYS_REFCURSOR)
+AS
+
+BEGIN
+
+OPEN cursor_ FOR    
+   Select ' All' as WTFT, 1 as  min_density from dual union select distinct (MIN_DENSITY  || ' - ' || MAX_DENSITY) WTFT,min_density from PUBLIC_PRICE_POINT WHERE PROD_fORM IN('C','MC') order by min_density
+             ;
+END;
+
+
+--6--
+
+CREATE OR REPLACE PROCEDURE SPDEV_PriceList_MerchantPrice(cursor_ OUT SYS_REFCURSOR)
+AS
+
+BEGIN
+
+OPEN cursor_ FOR    
+   Select ' All' as PRICE from dual union Select distinct '$ ' || CAST(PRICE as varchar2(30)) FROM PUBLIC_PRICE_POINT WHERE PROD_fORM IN('C','MC') order by PRICE
+             ;
+END;
+
+--7--
+
+CREATE OR REPLACE PROCEDURE SPDEV_PriceList_Size_InClass(param_ IN varchar,cursor_ OUT SYS_REFCURSOR)
+AS
+
+BEGIN
+
+OPEN cursor_ FOR    
+   Select ' All' as BASE_SIZE_DESC,'1' as Prod_form,1 as height from dual union 
+   Select distinct BASE_SIZE_DESC,PROD_form, height 
+   FROM PUBLIC_PRICE_POINT 
+   where PROD_fORM IN('W','HP','S','M') and Prod_form =  param_ 
+   order by PROD_form, height,BASE_SIZE_DESC
+             ;
+END;
+
+
+--8--
+CREATE OR REPLACE PROCEDURE SPDEV_PriceList_WTFT_InClass(param_ IN varchar,cursor_ OUT SYS_REFCURSOR)
+AS
+
+BEGIN
+
+OPEN cursor_ FOR    
+   Select ' All' as WTFT, 1 as  min_density from dual union 
+   select distinct (MIN_DENSITY  || ' - ' || MAX_DENSITY) WTFT,min_density 
+   from PUBLIC_PRICE_POINT WHERE PROD_fORM = param_ 
+   order by min_density
+             ;
+END;
+
+
+--9--
+
+CREATE OR REPLACE PROCEDURE SPDEV_PriceList_Price_InClass(param_ IN varchar,cursor_ OUT SYS_REFCURSOR)
+AS
+
+BEGIN
+
+OPEN cursor_ FOR    
+      Select ' All' as PRICE from dual union Select distinct '$ ' || CAST(PRICE as varchar2(30)) 
+      FROM PUBLIC_PRICE_POINT 
+      WHERE PROD_fORM = param_ 
+      order by PRICE
+             ;
+END;
+
+
+--10--
+
+
+create or replace view VW_PriceMerchantAll as
+(
+Select ' All' as BASE_SIZE_DESC,'1' as Prod_form,1 as height from dual union 
+(Select distinct BASE_SIZE_DESC,PROD_form, height FROM PUBLIC_PRICE_POINT WHERE PROD_fORM IN('C','MC') ) union 
+(select distinct substr(c_prod_size_ID,1,4) BASE_SIZE_DESC, 
+case when  (substr(c_prod_size_ID,2,1) = substr(c_prod_size_ID,4,1)) THEN 'Le' else 'Lu' end as PROD_form,
+J_height as height from OVDBA.V_PUBLIC_INVENTORY where c_prod_class_Id='ANGLE' )
+)
+
+--11--
+
+
+CREATE OR REPLACE PROCEDURE SPDEV_PriceList_MSize_INclass(param_ IN varchar,cursor_ OUT SYS_REFCURSOR)
+AS
+
+BEGIN
+
+OPEN cursor_ FOR    
+     Select ' All' as BASE_SIZE_DESC,'1' as Prod_form,1 as height from dual union 
+     select * from OVDBA.VW_PriceMerchantAll 
+     where PROD_FORM = param_  order by height
+             ;
+END;
+
+
+--12--	OLD--
+
+
+CREATE OR REPLACE PROCEDURE SPDEV_PriceList_SEARCH(SIZE_ IN varchar,WTFT_ IN varchar , PRICE_ IN varchar , PROD_form_ IN varchar , cursor_ OUT SYS_REFCURSOR)
+AS
+
+BEGIN
+
+    IF PROD_form_ ='Le' THEN 
+        OPEN cursor_ FOR  
+            select distinct substr(c_prod_size_ID,1,4) PRODUCT,  substr(c_prod_size_ID,6,8) as Thickness, F_LBS_PER_FT as LBFT,'$ ' || J_SECTIONS_IN_BUNDLE as PCS_2040 , '' as PCS_4160, PRICE
+            from OVDBA.V_PUBLIC_INVENTORY where c_prod_class_Id='ANGLE' and substr(c_prod_size_ID,2,1) = substr(c_prod_size_ID,4,1)  and (c_prod_size_ID like '%' || SIZE_ || '%' ) 
+            order by product, lbft asc, pcs_2040 desc; 
+       
+    ELSIF PROD_form_ ='Lu' THEN
+        OPEN cursor_ FOR  
+            select distinct substr(c_prod_size_ID,1,4) PRODUCT,  substr(c_prod_size_ID,6,8) as Thickness, F_LBS_PER_FT as LBFT,'$ ' || J_SECTIONS_IN_BUNDLE as PCS_2040 , '' as PCS_4160, PRICE
+            from OVDBA.V_PUBLIC_INVENTORY where c_prod_class_Id='ANGLE' and substr(c_prod_size_ID,2,1) <> substr(c_prod_size_ID,4,1)  and (c_prod_size_ID like '%' || SIZE_ || '%' ) 
+            order by product, lbft asc, pcs_2040 desc; 
+            
+    ELSE
+        
+                   
+                OPEN cursor_ FOR  
+                select PROD_form, BASE_SIZE_DESC, (MIN_DENSITY || ' - ' || MAX_DENSITY) as WTFT,('$ ' || PRICE) PRICE 
+                from PUBLIC_PRICE_POINT Where PROD_form is not null     
+                and (BASE_SIZE_DESC like '%' || SIZE_ || '%' )  and ((MIN_DENSITY || ' - ' || MAX_DENSITY) like '%' || WTFT_ || '%')   
+                and (PRICE like '%' || PRICE_ || '%') and PROD_form = PROD_form_ 
+                
+                ;
+                                
+       
+    END IF;										   
+
+END;
+
+--13--   NEW
+
+CREATE OR REPLACE PROCEDURE SPDEV_PriceList_SEARCH1(PROD_form_ IN varchar , cursor_ OUT SYS_REFCURSOR)
+AS
+
+BEGIN
+
+    IF PROD_form_ ='Le' THEN 
+        OPEN cursor_ FOR  
+            select distinct substr(c_prod_size_ID,1,4) PRODUCT,  substr(c_prod_size_ID,6,8) as Thickness, F_LBS_PER_FT as LBFT,'$ ' || J_SECTIONS_IN_BUNDLE as PCS_2040 , '' as PCS_4160, PRICE
+            from OVDBA.V_PUBLIC_INVENTORY where c_prod_class_Id='ANGLE' and substr(c_prod_size_ID,2,1) = substr(c_prod_size_ID,4,1) 
+            order by product, lbft asc, pcs_2040 desc; 
+       
+    ELSIF PROD_form_ ='Lu' THEN
+        OPEN cursor_ FOR  
+            select distinct substr(c_prod_size_ID,1,4) PRODUCT,  substr(c_prod_size_ID,6,8) as Thickness, F_LBS_PER_FT as LBFT,'$ ' || J_SECTIONS_IN_BUNDLE as PCS_2040 , '' as PCS_4160, PRICE
+            from OVDBA.V_PUBLIC_INVENTORY where c_prod_class_Id='ANGLE' and substr(c_prod_size_ID,2,1) <> substr(c_prod_size_ID,4,1)  
+            order by product, lbft asc, pcs_2040 desc; 
+            
+    ELSE
+        OPEN cursor_ FOR  
+            select PROD_form, BASE_SIZE_DESC, (MIN_DENSITY || ' - ' || MAX_DENSITY) as WTFT,('$ ' || PRICE) PRICE 
+            from PUBLIC_PRICE_POINT Where PROD_form is not null     
+            and PROD_form = PROD_form_                 
+                ;                                      
+    END IF;
+
+END;
