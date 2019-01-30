@@ -94,7 +94,7 @@ namespace WebApplication1.DataAccess
         #region "Membership / Login"
         public DataTable GetUsername(string user_name)
         {
-            return sqlDal.dbGetCommand("select CustomerId,UserName from[ASPNETDB].[dbo].[aspnet_Users] where username = '" + user_name + "' and Active=1");
+            return sqlDal.dbGetCommand("select CustomerId,UserName,UserId from[ASPNETDB].[dbo].[aspnet_Users] where username = '" + user_name + "' and Active=1");
         }
 
         public DataTable GetPassword(string user_name)

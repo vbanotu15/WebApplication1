@@ -26,6 +26,7 @@ namespace WebApplication1.Security
             DataTable dtUser = balMembership.GetUsername(txtUsername.Text.Trim());           
             if(dtUser.Rows.Count>0)
             {
+
                 lblUserName.Text = "";
             }
             else
@@ -37,18 +38,27 @@ namespace WebApplication1.Security
             DataTable dtCheckPassword = balMembership.GetPassword(txtUsername.Text.Trim());
             if (dtCheckPassword.Rows.Count > 0)
             {
-                string password = dtCheckPassword.Rows[0]["password"].ToString();
+                string ls_salt = dtCheckPassword.Rows[0]["PASSWORDSALT"].ToString();
 
-                string hashPassword = string.Empty;
+                var as_pass = txtPassword.Text.Trim();
 
-                var as_pass = txtPassword.Text;
-                //as_pass += password;
+                String ls_act_code = Regex.Replace(as_pass, @"[^a-zA-Z0-9]", m => new Random().Next(0, 9).ToString());
+
+
+                as_pass += ls_salt;
+
+                String ls_act_code1 = Regex.Replace(as_pass, @"[^a-zA-Z0-9]", m => new Random().Next(0, 9).ToString());
+
 
                 HashAlgorithm hashAlg = new SHA256Managed();        
-                byte[] bytVal = System.Text.Encoding.UTF8.GetBytes(as_pass);
+                byte[] bytVal = System.Text.Encoding.UTF8.GetBytes(ls_act_code1);
                 byte[] bytHash = hashAlg.ComputeHash(bytVal);
 
+                string hashPassword = string.Empty;
                 hashPassword = Convert.ToBase64String(bytHash);
+
+
+                
 
                 //if(password != hashPassword)
                 //{
@@ -56,7 +66,7 @@ namespace WebApplication1.Security
                 //    return;
                 //}
 
-               // string str = ValidatePass(txtPassword.Text.Trim());
+                // string str = ValidatePass(txtPassword.Text.Trim());
 
                 lblPassword.Text = "";
             }
